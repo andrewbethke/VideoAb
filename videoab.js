@@ -1,3 +1,5 @@
+import {setupApi} from "/youtubePlugin.js" 
+
 /**
  * 
  * @param {*} videoId 
@@ -17,5 +19,8 @@ function changeTitle(videoId, newTitle){
 }
 
 function setup(){
+    setupApi();
     // TODO: Implement any setup code.
 }
+
+setup();
