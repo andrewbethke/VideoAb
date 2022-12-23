@@ -1,11 +1,32 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>VideoAb</title>
-        <script src="https://apis.google.com/js/api.js"></script>
-        <script type="module" src="/videoab.js"></script>
-    </head>
-    <body>
 
-    </body>
+<head>
+    <title>VideoAb</title>
+    <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="/youtubePlugin.js"></script>
+    <script src="/videoab.js"></script>
+</head>
+
+<body>
+    <!--Show for new users or users who have elected to not allow cookies.-->
+    <div id="pre-google-auth" class="autocenter">
+        <div id="g_id_onload" data-client_id="50007999406-lekpivmd7rn6v3oev43qivqm38647dra.apps.googleusercontent.com"
+            data-context="signin" data-ux_mode="popup" data-callback="loginToGoogle" data-auto_prompt="false">
+        </div>
+
+        <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_blue" data-text="signin_with"
+            data-size="large" data-logo_alignment="left">
+        </div>
+    </div>
+
+    <!--Once the user is logged in, show the actual app.-->
+    <div id="app" style="display: none;">
+
+    </div>
+</body>
+
 </html>

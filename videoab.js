@@ -1,4 +1,11 @@
-import {setupApi} from "/youtubePlugin.js" 
+
+/**
+ * Takes an API response and populates the video list
+ * with them.
+ */
+function populateVideos(response){
+
+}
 
 /**
  * 
@@ -6,7 +13,7 @@ import {setupApi} from "/youtubePlugin.js"
  * @param {*} newThumbnail 
  */
 function changeThumbnail(videoId, newThumbnail){
-    // TODO: Implement Thumbnail Swapping
+    
 }
 
 /**
@@ -22,5 +29,3 @@ function setup(){
     setupApi();
     // TODO: Implement any setup code.
 }
-
-setup();
