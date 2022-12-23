@@ -43,10 +43,6 @@ function execute() {
             function (err) { console.error("Execute error", err); });
 }
 
-gapi.load("client:auth2", function () {
-    gapi.auth2.init({ client_id: "50007999406-lekpivmd7rn6v3oev43qivqm38647dra.apps.googleusercontent.com" });
-});
-
 function setupApi() {
     authenticate().then(loadClient);
 }
