@@ -5,28 +5,70 @@
     <title>VideoAb</title>
     <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
     <link rel="stylesheet" href="/styles.css">
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="/youtubePlugin.js"></script>
-    <script src="/videoab.js"></script>
 </head>
 
 <body>
-    <!--Show for new users or users who have elected to not allow cookies.-->
-    <div id="pre-google-auth" class="autocenter">
-        <div id="g_id_onload" data-client_id="50007999406-7vr8taktahml4loqt67aeuutn96mpofg.apps.googleusercontent.com"
-            data-context="signin" data-ux_mode="popup" data-callback="loginToGoogle" data-auto_prompt="false">
-        </div>
+    <!--Show for first time users-->
+    <div id="cookie-consent" class="autocenter">
+        <div class="autocenter">
+            <h1>Cookies</h1>
+            <p>Hi. This website, like most websites, uses cookies. Due to EU law, I have to ask you whether or not you
+                consent to me using cookies to store data in your browser.</p>
+            <p>This website uses two types of cookies.</p>
 
-        <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_blue" data-text="signin_with"
-            data-size="large" data-logo_alignment="left">
+            <h2>Strictly Necessary Cookies</h2>
+            <p>These cookies are required for the website to function. In this case, the <em>only</em> functional cookie
+                is one storing your preference on the next kind of cookie:</p>
+
+            <h2>Functionality Cookies</h2>
+            <p>These cookies are used to improve functionality of the website. This tool uses Functionality Cookies for
+                the following purposes:</p>
+            <ul>
+                <li>Google Account and User Status</li>
+            </ul>
+
+            <p>If you'd rather have this website place <em>no</em> cookies on your system, you may elect to leave the
+                website at this time. No cookies are placed on your system until you click the button below.</p>
+
+            <h2>Your Cookie Preferences:</h2>
+            <form id="cookie-form">
+                Strictly Necessary Cookies:
+                    <input type="checkbox" name="Strictly Necessary Cookies" disabled="true" checked>
+                Functionality Cookies:
+                    <input id="functionality-cookie-checkbox" type="checkbox" name="Functionality Cookies" value="true" checked>
+                <br>
+                <input type="button" value="Disable All" onclick="disableAllCookies()">
+                <input type="button" value="Save Preferences" onclick="saveCookiePreferences()">
+            </form>
         </div>
     </div>
+
+    <!--Show for new users or users who have elected to not allow cookies.-->
+    <div id="google-auth" class="autocenter" style="display: none;">
+        <div class="" autocenter">
+            <div id="g_id_onload"
+                data-client_id="50007999406-7vr8taktahml4loqt67aeuutn96mpofg.apps.googleusercontent.com"
+                data-context="signin" data-ux_mode="popup" data-callback="loginToGoogle" data-auto_prompt="false">
+            </div>
+
+            <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_blue"
+                data-text="signin_with" data-size="large" data-logo_alignment="left">
+            </div>
+        </div>
+    </div>
+    <!--Load cookie script only after relevant elements are loaded-->
+    <script src="/cookies.js"></script>
 
     <!--Once the user is logged in, show the actual app.-->
     <div id="app" style="display: none;">
 
     </div>
+
+    <!--These script tags are not allowed to run until *after* -->
+    <script src="https://apis.google.com/js/api.js" type="javascript/blocked"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer type="javascript/blocked"></script>
+    <script src="/youtubePlugin.js" type="javascript/blocked"></script>
+    <script src="/videoab.js" type="javascript/blocked"></script>
 </body>
 
 </html>

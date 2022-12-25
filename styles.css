@@ -1,3 +1,30 @@
+* {
+    position: relative;
+}
+
+html, body {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+p, ul {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+em {
+    font-style: italic;
+}
+
+ul {
+    list-style-type: disc;
+    list-style-position: inside;
+    text-indent: 2em;
+}
+
 .autocenter {
     position: absolute;
     top: 50%;
@@ -5,7 +32,25 @@
     transform: translate(-50%, -50%);
 }
 
-#pre-google-auth {
+h1 {
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+#cookie-consent {
+    width: 50vw;
+    height: 30vw;
+    border: 3px solid #222;
+    border-radius: 5em;
+}
+
+#google-auth {
     width: 30vw;
     height: 50vh;
 }
