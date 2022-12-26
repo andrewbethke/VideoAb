@@ -5,6 +5,15 @@
     <title>VideoAb</title>
     <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
     <link rel="stylesheet" href="/styles.css">
+
+    <!--
+        These script tags are not allowed to run until *after* cookie consent is obtained.
+        Placed in the order in which they must be loaded when enabled.
+    -->
+    <script src="/videoab.js" type="javascript/blocked"></script>
+    <script src="/youtubePlugin.js" type="javascript/blocked"></script>
+    <script src="https://apis.google.com/js/api.js" type="javascript/blocked"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer type="javascript/blocked"></script>
 </head>
 
 <body>
@@ -56,19 +65,14 @@
             </div>
         </div>
     </div>
-    <!--Load cookie script only after relevant elements are loaded-->
-    <script src="/cookies.js"></script>
 
     <!--Once the user is logged in, show the actual app.-->
     <div id="app" style="display: none;">
 
     </div>
 
-    <!--These script tags are not allowed to run until *after* -->
-    <script src="https://apis.google.com/js/api.js" type="javascript/blocked"></script>
-    <script src="https://accounts.google.com/gsi/client" async defer type="javascript/blocked"></script>
-    <script src="/youtubePlugin.js" type="javascript/blocked"></script>
-    <script src="/videoab.js" type="javascript/blocked"></script>
+    <!--Load cookie script only after everything else is loaded-->
+    <script src="/cookies.js"></script>
 </body>
 
 </html>
