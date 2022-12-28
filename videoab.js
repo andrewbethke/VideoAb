@@ -4,7 +4,7 @@
  * with them.
  */
 function populateVideos(response){
-
+    
 }
 
 /**
@@ -25,7 +25,7 @@ function changeTitle(videoId, newTitle){
     // TODO: Implement Title Changing
 }
 
-function setup(){
-    setupApi();
-    // TODO: Implement any setup code.
+function setupApp(){
+    document.getElementById("google-auth").style.display = "none"
+    document.getElementById("app").style.display = "block";
 }
