@@ -3,8 +3,11 @@
  * the YouTube APIs. Or it will, anyway.
  */
 
-var API_KEY = "";
+var API_KEY;
 
+/**
+ * Loads the API key from the external apikey.txt file.
+ */
 async function loadApiKey() {
     let keyFile = await fetch("/apikey.txt")
         .then(response => response.text())
@@ -14,13 +17,6 @@ async function loadApiKey() {
 function loadGoogleApis() {
     // TODO: Reimplement to use CORS
 };
-
-function authenticate() {
-    return gapi.auth2.getAuthInstance()
-        .signIn({ scope: "https://www.googleapis.com/auth/youtube.readonly" })
-        .then(function () { console.log("Sign-in successful"); },
-            function (err) { console.error("Error signing in", err); });
-}
 
 function loadClient() {
     gapi.client.setApiKey(API_KEY);
@@ -48,12 +44,17 @@ function setupApi() {
 }
 
 /**
- * Handle the javascript callback provided by
- * the "Sign In With Google" button.
- * @param {*} response 
+ * Run the necessary stuff to get the Google OAuth token.
  */
-function loginToGoogle(response) {
-    // OBVIOUSLY VERY TEMPORARY
-    // NEED TO FIGURE OUT WHAT INFO I GET
-    console.log(response);
+function getGoogleOauthToken() {
+    const googleOauthClient = google.accounts.oauth2.initTokenClient({
+        client_id: '50007999406-7vr8taktahml4loqt67aeuutn96mpofg.apps.googleusercontent.com',
+        scope: 'https://www.googleapis.com/auth/youtube.upload',
+        callback: (response) => {
+            console.log(response);
+        }
+    });
+    googleOauthClient.requestAccessToken();
 }
+
+// Create the OAuth client as soon as the script loads so it's ready.

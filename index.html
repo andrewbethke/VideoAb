@@ -54,16 +54,8 @@
 
     <!--Show for new users or users who have elected to not allow cookies.-->
     <div id="google-auth" class="autocenter" style="display: none;">
-        <div class="autocenter">
-            <div id="g_id_onload"
-                data-client_id="50007999406-7vr8taktahml4loqt67aeuutn96mpofg.apps.googleusercontent.com"
-                data-context="signin" data-ux_mode="popup" data-callback="loginToGoogle" data-auto_prompt="false">
-            </div>
-
-            <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_blue"
-                data-text="signin_with" data-size="large" data-logo_alignment="left">
-            </div>
-        </div>
+        <button onclick="getGoogleOauthToken()">Sign in with Google</button>
+    </div>
     </div>
 
     <!--Once the user is logged in, show the actual app.-->
