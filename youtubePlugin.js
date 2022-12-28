@@ -9,22 +9,22 @@ var API_KEY;
  * Loads the API key from the external apikey.txt file.
  */
 async function loadApiKey() {
-    let keyFile = await fetch("/apikey.txt")
+    await fetch("/apikey.txt")
         .then(response => response.text())
-        .then(key => API_KEY = key);
+        .then(key => {
+            API_KEY = key
+            gapi.client.setApiKey(API_KEY);
+        });
 }
 
 function loadGoogleApis() {
     // TODO: Reimplement to use CORS
-};
-
-function loadClient() {
-    gapi.client.setApiKey(API_KEY);
-    return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
-        .then(function () { console.log("GAPI client loaded for API"); },
-            function (err) { console.error("Error loading GAPI client for API", err); });
 }
 
+/**
+ * Test function from google examples for YouTube API
+ * @returns
+ */
 function execute() {
     return gapi.client.youtube.channels.list({
         "part": [
@@ -39,22 +39,43 @@ function execute() {
             function (err) { console.error("Execute error", err); });
 }
 
-function setupApi() {
-    authenticate().then(loadClient);
-}
-
 /**
- * Run the necessary stuff to get the Google OAuth token.
+ * Get a Google OAuth token and give it to gapi.
  */
 function getGoogleOauthToken() {
     const googleOauthClient = google.accounts.oauth2.initTokenClient({
         client_id: '50007999406-7vr8taktahml4loqt67aeuutn96mpofg.apps.googleusercontent.com',
-        scope: 'https://www.googleapis.com/auth/youtube.upload',
-        callback: (response) => {
-            console.log(response);
-        }
+        scope: 'https://www.googleapis.com/auth/youtube.readonly',
+        callback: (response) => gapi.client.setToken(response)
     });
     googleOauthClient.requestAccessToken();
 }
 
-// Create the OAuth client as soon as the script loads so it's ready.
+/**
+ * Once gapi has loaded, set up gapi and load necessary scopes.
+ */
+function setupGapi() {
+    gapi.client.setApiKey(API_KEY);
+
+    gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
+        .then(function () { console.log("GAPI client loaded for API"); },
+            function (err) { console.error("Error loading GAPI client for API", err); });
+
+    loadApiKey();
+}
+
+/**
+ * Load gapi, handling the case that gapi has not yet loaded.
+ */
+function loadGapi() {
+    // If not yet loaded, wait 10 milliseconds and recurse.
+    if (typeof gapi === 'undefined'){
+        window.setTimeout(loadGapi, 10);
+        return;
+    }
+
+    // If it is loaded, then setup gapi
+    gapi.load('client', setupGapi);
+}
+
+loadGapi();
