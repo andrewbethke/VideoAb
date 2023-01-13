@@ -9,21 +9,32 @@ function logError(err) {
  */
 function populateVideos(response) {
     let parsedResponse = JSON.parse(response.body);
-    //TEMPORARY: STRAIGHT COPY FROM OLD AROBSITE.COM CODE
-    var printout = "";
     for(let video of parsedResponse.items) {
-        printout += '<div class="videoobject"><a class="video" href="http://www.youtube.com/watch?v=' + video.snippet.resourceId.videoId + '"><h3>' + video.snippet.title + '</h3><img src="https://i.ytimg.com/vi/' + video.snippet.resourceId.videoId + '/hqdefault.jpg" class="thumbnail" /></div>';
+        let div = document.createElement("div");
+        div.classList.add("videolistitem");
+
+        let link = document.createElement("a");
+        link.href = `http://www.youtube.com/watch?v=${video.snippet.resourceId.videoId}`;
+        div.appendChild(link);
+
+        let title = document.createElement("h3");
+        title.innerText = video.snippet.title;
+        link.appendChild(title);
+
+        let thumbnail = document.createElement("img");
+        thumbnail.src = `https://i.ytimg.com/vi/${video.snippet.resourceId.videoId}/hqdefault.jpg`;
+        thumbnail.classList.add("videolistthumbnail");
+        link.appendChild(title);
+
+        document.getElementById("videolist").appendChild(div);
     }
-    document.getElementById("app").innerHTML = printout;
 }
 
 /**
  * Takes a response to channels.list and gets the videos themselves.
  */
 function fetchVideos(response) {
-    let channel = response.body;
-    let parsedResponse = JSON.parse(channel);
-    let uploadsPlaylistId = parsedResponse.items[0].contentDetails.relatedPlaylists.uploads;
+    let uploadsPlaylistId = JSON.parse(response.body).items[0].contentDetails.relatedPlaylists.uploads;
     gapi.client.youtube.playlistItems.list({
         "playlistId": uploadsPlaylistId,
         "part": ["snippet"]
@@ -52,7 +63,7 @@ function setupApp() {
     // Hide authentication, show the app.
     document.getElementById("google-auth").style.display = "none"
     document.getElementById("app").style.display = "block";
-    // Populate the videos list for the first time.
+    // Request the channel's information to retrieve the uploads playlist id.
     gapi.client.youtube.channels.list({
         "part": ["contentDetails"],
         "mine": true
