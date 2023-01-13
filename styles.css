@@ -8,6 +8,7 @@ html, body {
     top: 0;
     width: 100vw;
     height: 100vh;
+    overflow-x: hidden;
 }
 
 p, ul {
@@ -33,13 +34,13 @@ ul {
 }
 
 h1 {
-    font-size: 3em;
+    font-size: 3rem;
     font-weight: bold;
     text-align: center;
 }
 
 h2 {
-    font-size: 2em;
+    font-size: 2rem;
     font-weight: bold;
 }
 
@@ -47,10 +48,53 @@ h2 {
     width: 50vw;
     height: 30vw;
     border: 3px solid #222;
-    border-radius: 5em;
+    border-radius: 5rem;
 }
 
 #google-auth {
     width: 30vw;
     height: 50vh;
 }
+
+#app {
+    display: flex;
+    align-content: start;
+}
+
+#videolist {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: 33vw;
+    height: calc(100vh - 2rem);
+    overflow-y: scroll;
+
+    border: 1px solid black;
+}
+
+.videolistitem {
+    flex-basis: auto;
+    height: 9rem;
+    overflow: hidden;
+}
+
+.videolistitem img {
+    width: 16rem;
+    height: 9rem;
+    float: left;
+}
+
+.videolistitem div {
+    float: left;
+    padding: 1em;
+    width: calc(100% - 16rem - 2rem);
+}
+
+.videolistitem div h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+

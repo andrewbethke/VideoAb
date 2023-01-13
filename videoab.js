@@ -9,6 +9,7 @@ function logError(err) {
  */
 function populateVideos(response) {
     let parsedResponse = JSON.parse(response.body);
+    console.log(parsedResponse);
     for(let video of parsedResponse.items) {
         let div = document.createElement("div");
         div.classList.add("videolistitem");
@@ -17,14 +18,21 @@ function populateVideos(response) {
         link.href = `http://www.youtube.com/watch?v=${video.snippet.resourceId.videoId}`;
         div.appendChild(link);
 
+        let thumbnail = document.createElement("img");
+        thumbnail.src = video.snippet.thumbnails.medium.url;
+        thumbnail.classList.add("videolistthumbnail");
+        link.appendChild(thumbnail);
+
+        let info = document.createElement("div");
+        link.appendChild(info);
+
         let title = document.createElement("h3");
         title.innerText = video.snippet.title;
-        link.appendChild(title);
+        info.appendChild(title);
 
-        let thumbnail = document.createElement("img");
-        thumbnail.src = `https://i.ytimg.com/vi/${video.snippet.resourceId.videoId}/hqdefault.jpg`;
-        thumbnail.classList.add("videolistthumbnail");
-        link.appendChild(title);
+        let date = document.createElement("p");
+        date.innerText = new Date(video.contentDetails.videoPublishedAt).toLocaleDateString('en-us', {year:"numeric", month:"short", day:"numeric"});
+        info.appendChild(date);
 
         document.getElementById("videolist").appendChild(div);
     }
@@ -37,7 +45,7 @@ function fetchVideos(response) {
     let uploadsPlaylistId = JSON.parse(response.body).items[0].contentDetails.relatedPlaylists.uploads;
     gapi.client.youtube.playlistItems.list({
         "playlistId": uploadsPlaylistId,
-        "part": ["snippet"]
+        "part": ["snippet,contentDetails"],
     }).then(populateVideos, logError);
 }
 
