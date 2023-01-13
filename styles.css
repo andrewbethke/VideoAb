@@ -98,3 +98,10 @@ h2 {
     overflow: hidden;
 }
 
+.videolistitemlink {
+    display: block;
+    background-image: url("/icons/iconmonstr-link-2.svg");
+    background-size: contain;
+    width: 1rem;
+    height: 1rem;
+}

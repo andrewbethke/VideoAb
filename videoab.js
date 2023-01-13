@@ -3,6 +3,11 @@ function logError(err) {
     console.log(err);
 }
 
+function selectVideo(videoId){
+    console.log(videoId);
+    //TODO: Implement video selection code.
+}
+
 /**
  * Takes an API response and populates the video list
  * with them.
@@ -13,18 +18,19 @@ function populateVideos(response) {
     for(let video of parsedResponse.items) {
         let div = document.createElement("div");
         div.classList.add("videolistitem");
+        div.id = video.contentDetails.videoId;
 
-        let link = document.createElement("a");
-        link.href = `http://www.youtube.com/watch?v=${video.snippet.resourceId.videoId}`;
-        div.appendChild(link);
+        let selectorLink = document.createElement("a");
+        selectorLink.onclick = function() {selectVideo(video.contentDetails.videoId)};
+        div.appendChild(selectorLink);
 
         let thumbnail = document.createElement("img");
         thumbnail.src = video.snippet.thumbnails.medium.url;
         thumbnail.classList.add("videolistthumbnail");
-        link.appendChild(thumbnail);
+        selectorLink.appendChild(thumbnail);
 
         let info = document.createElement("div");
-        link.appendChild(info);
+        selectorLink.appendChild(info);
 
         let title = document.createElement("h3");
         title.innerText = video.snippet.title;
@@ -33,6 +39,11 @@ function populateVideos(response) {
         let date = document.createElement("p");
         date.innerText = new Date(video.contentDetails.videoPublishedAt).toLocaleDateString('en-us', {year:"numeric", month:"short", day:"numeric"});
         info.appendChild(date);
+
+        let link = document.createElement("a");
+        link.href = `http://www.youtube.com/watch?v=${video.contentDetails.videoId}`;
+        link.classList.add("videolistitemlink");
+        info.appendChild(link);
 
         document.getElementById("videolist").appendChild(div);
     }
