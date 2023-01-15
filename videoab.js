@@ -1,16 +1,29 @@
+// Initialize videoAb object.
+const videoAb = {};
+videoAb.selected = "";
 
 function logError(err) {
     console.log(err);
 }
 
+/**
+ * Runs when a video in the video list is clicked. Changes styling of the video
+ * in the list and sets the program's selected video ID.
+ * @param {String} videoId 
+ */
 function selectVideo(videoId){
     console.log(videoId);
-    //TODO: Implement video selection code.
+    // Clear visual selection of old video.
+    if(videoAb.selected != "")
+        document.getElementById(videoAb.selected).removeAttribute("style");
+    
+    // Select new video.
+    videoAb.selected = videoId;
+    document.getElementById(videoAb.selected).style.backgroundColor = "#CCFFCC";
 }
 
 /**
- * Takes an API response and populates the video list
- * with them.
+ * Takes an API response and populates the video list with them.
  */
 function populateVideos(response) {
     let parsedResponse = JSON.parse(response.body);
