@@ -67,6 +67,7 @@
                 <h3>General Settings</h3>
                 <h4>Properties to AB Test:</h4>
                 Titles: <input type="checkbox" name="Titles" checked><br>
+                Note: All below settings are not yet implemented.<br>
                 Thumbnails: <input type="checkbox" name="Thumbnails"><br>
                 <h4>AB Testing Settings</h4>
                 <p>When both titles and thumbnails are being AB tested, would
@@ -78,9 +79,18 @@
             </div>
             <div id="titlecontrol" class="settingspanel">
                 <h3>Title Settings</h3>
+                Note: These settings will be ignored if you've selected not to AB test titles.<br>
+                Title 1: <input type="text"><br>
+                Title 2: <input type="text"><br>
+                <!--TODO: Implement the ability to add or remove an arbitrary number of titles.-->
             </div>
             <div id="thumbnailcontrol" class="settingspanel">
                 <h3>Thumbnail Settings</h3>
+                Note: These settings will be ignored if you've selected not to AB test thumbnails.<br>
+                Note: Functionality not yet implemented.<br>
+                Thumbnail 1: <input type="file" accept="image/jpeg,image/png"><br>
+                Thumbnail 2: <input type="file" accept="image/jpeg,image/png"><br>
+                <!--TODO: Implement the ability to add or remove an arbitrary number of thumbnails.-->
             </div>
         </div>
     </div>
