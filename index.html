@@ -44,7 +44,7 @@
                 Strictly Necessary Cookies:
                     <input type="checkbox" name="Strictly Necessary Cookies" disabled="true" checked>
                 Functionality Cookies:
-                    <input id="functionality-cookie-checkbox" type="checkbox" name="Functionality Cookies" value="true" checked>
+                    <input id="functionality-cookie-checkbox" type="checkbox" name="Functionality Cookies" checked>
                 <br>
                 <input type="button" value="Disable All" onclick="disableAllCookies()">
                 <input type="button" value="Save Preferences" onclick="saveCookiePreferences()">
@@ -61,7 +61,28 @@
     <div id="app" style="display: none;">
         <div id="videolist"><!--This element is populated by Javascript.--></div>
         <!--TODO: Add infinite scroll to the video list.-->
-        <div id="controlpanel"></div>
+        <div id="controlpanel">
+            <h2>AB Testing Configuration</h2>
+            <div id="generalcontrol" class="settingspanel">
+                <h3>General Settings</h3>
+                <h4>Properties to AB Test:</h4>
+                Titles: <input type="checkbox" name="Titles" checked><br>
+                Thumbnails: <input type="checkbox" name="Thumbnails"><br>
+                <h4>AB Testing Settings</h4>
+                <p>When both titles and thumbnails are being AB tested, would
+                you like to link them?</p>
+                <p>When this is selected, title 1 and thumbnail 1 will be treated
+                as one configuration, and will be tested together. When this is
+                unselected, every combination of title and thumbnail will be tried.</p>
+                <input type="checkbox" name="Link Properties"><br>
+            </div>
+            <div id="titlecontrol" class="settingspanel">
+                <h3>Title Settings</h3>
+            </div>
+            <div id="thumbnailcontrol" class="settingspanel">
+                <h3>Thumbnail Settings</h3>
+            </div>
+        </div>
     </div>
 
     <!--Load cookie script only after everything else is loaded-->
