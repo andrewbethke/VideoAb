@@ -60,6 +60,10 @@ function createVideoNode(video) {
     date.innerText = new Date(video.snippet.publishedAt).toLocaleDateString('en-us', { year: "numeric", month: "short", day: "numeric" });
     info.appendChild(date);
 
+    let viewCount = document.createElement("p");
+    viewCount.innerText = `${video.statistics.viewCount} views`;
+    info.appendChild(viewCount);
+
     // Adds a link to the video on youtube.
     let link = document.createElement("a");
     link.href = `http://www.youtube.com/watch?v=${video.id}`;
