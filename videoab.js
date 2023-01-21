@@ -141,12 +141,19 @@ function handleChannelResponse(response) {
 }
 
 /**
- * 
- * @param {*} videoId 
- * @param {*} newThumbnail 
+ * Changes the thumbnail of the given video to the given new thumbnail.
+ * @param {*} videoId The ID of the video whose thumbnail we're changing.
+ * @param {*} newThumbnail The new thumbnail for the video.
  */
 function changeThumbnail(videoId, newThumbnail) {
-
+    fetch(`https:/www.googleapis.com/upload/youtube/v3/thumbnails/set?videoId=${videoId}&uploadType=media`, {
+        "method": "POST",
+        "headers": {
+            "Authorization": `Bearer ${gapi.client.getToken().access_token}`,
+            "Content-Type": newThumbnail.type
+        },
+        "body": newThumbnail
+    }).then(function (response) { console.log(response) }, logError);
 }
 
 /**
