@@ -92,7 +92,6 @@ function changeThumbnail(videoId, newThumbnail) {
  * @param {*} newTitle 
  */
 function changeTitle(videoId, newTitle) {
-    // TODO: Implement Title Changing
     let snippet = fetchedVideos[videoId].snippet;
     snippet.title = newTitle;
     // TODO: Change to use the currently set category for the video.
