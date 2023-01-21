@@ -2,6 +2,8 @@
 const videoAb = {};
 videoAb.selected = "";
 
+const fetchedVideos = {};
+
 function logError(err) {
     console.log(err);
 }
@@ -29,6 +31,8 @@ function populateVideos(response) {
     let parsedResponse = JSON.parse(response.body);
     console.log(parsedResponse);
     for(let video of parsedResponse.items) {
+        fetchedVideos[video.contentDetails.videoId] = video;
+
         let div = document.createElement("div");
         div.classList.add("videolistitem");
         div.id = video.contentDetails.videoId;
@@ -89,6 +93,27 @@ function changeThumbnail(videoId, newThumbnail) {
  */
 function changeTitle(videoId, newTitle) {
     // TODO: Implement Title Changing
+    let snippet = fetchedVideos[videoId].snippet;
+    snippet.title = newTitle;
+    // TODO: Change to use the currently set category for the video.
+    snippet.categoryId = "20";
+    gapi.client.youtube.videos.update({
+        "part": [
+            "snippet"
+        ],
+        "resource": {
+            "id": videoId,
+            "snippet": snippet
+        }
+    }).then(function (response) {console.log(response)}, logError);
+}
+
+/**
+ * Runs when the button in the control panel is pressed. Performs the necessary
+ * setup to run an AB Test.
+ */
+function beginABTest(){
+    // TODO: Implement
 }
 
 function setupApp() {

@@ -47,7 +47,7 @@ function execute() {
 function getGoogleOauthToken() {
     const googleOauthClient = google.accounts.oauth2.initTokenClient({
         client_id: '50007999406-7vr8taktahml4loqt67aeuutn96mpofg.apps.googleusercontent.com',
-        scope: 'https://www.googleapis.com/auth/youtube.readonly',
+        scope: 'https://www.googleapis.com/auth/youtube',
         callback: (response) => {
             gapi.client.setToken(response)
             setupApp();
