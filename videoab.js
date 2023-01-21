@@ -54,7 +54,7 @@ function populateVideos(response) {
         info.appendChild(title);
 
         let date = document.createElement("p");
-        date.innerText = new Date(video.contentDetails.videoPublishedAt).toLocaleDateString('en-us', {year:"numeric", month:"short", day:"numeric"});
+        date.innerText = new Date(video.snippet.publishedAt).toLocaleDateString('en-us', {year:"numeric", month:"short", day:"numeric"});
         info.appendChild(date);
 
         let link = document.createElement("a");
@@ -67,14 +67,53 @@ function populateVideos(response) {
 }
 
 /**
- * Takes a response to channels.list and gets the videos themselves.
+ * Takes a response to a playlistItems.list request and sends a videos.list
+ * request to get more information about the videos.
  */
-function fetchVideos(response) {
-    let uploadsPlaylistId = JSON.parse(response.body).items[0].contentDetails.relatedPlaylists.uploads;
-    gapi.client.youtube.playlistItems.list({
-        "playlistId": uploadsPlaylistId,
-        "part": ["snippet,contentDetails"],
+function requestVideos(response) {
+    let parsedResponse = JSON.parse(response.body);
+    let videoIdList = "";
+    for(let video of parsedResponse.items){
+        videoIdList = videoIdList + video.contentDetails.videoId + ",";
+    }
+
+    gapi.client.youtube.videos.list({
+        "part": ["snippet,contentDetails,statistics"],
+        "id": videoIdList
     }).then(populateVideos, logError);
+}
+
+/**
+ * Runs a playlistItems.list request and then passes the response to
+ * requestVideos to retrieve even more information about the videos.
+ * @param {*} playlistId The playlist ID to request items from.
+ * @param {*} pageToken the page token to retrieve.
+ */
+function requestPlaylistItems(playlistId, pageToken = null) {
+    gapi.client.youtube.playlistItems.list({
+        "playlistId": playlistId,
+        "part": ["snippet,contentDetails"],
+        "pageToken": pageToken
+    }).then(requestVideos, logError);
+}
+
+/**
+ * Takes a response from a channels.list request and extracts the uploads
+ * playlist id.
+ * @param response The response given by channels.list.
+ * @returns The channel's uploads playlist ID.
+ */
+function getUploadsPlaylist(response){
+    return JSON.parse(response.body).items[0].contentDetails.relatedPlaylists.uploads;
+}
+
+/**
+ * Takes a response from a channels.list request and then requests playlist
+ * items from the channel's uploads playlist.
+ * @param response The response given by channels.list.
+ */
+function handleChannelResponse(response){
+    requestPlaylistItems(getUploadsPlaylist(response));
 }
 
 /**
@@ -87,9 +126,9 @@ function changeThumbnail(videoId, newThumbnail) {
 }
 
 /**
- * 
- * @param {*} videoId 
- * @param {*} newTitle 
+ * Changes the title of the given video to the given new title.
+ * @param {String} videoId The ID of the video whose title we're changing.
+ * @param {String} newTitle The new title for the video.
  */
 function changeTitle(videoId, newTitle) {
     let snippet = fetchedVideos[videoId].snippet;
@@ -123,5 +162,5 @@ function setupApp() {
     gapi.client.youtube.channels.list({
         "part": ["contentDetails"],
         "mine": true
-    }).then(fetchVideos, logError);
+    }).then(handleChannelResponse, logError);
 }
