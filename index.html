@@ -5,61 +5,19 @@
     <title>VideoAb</title>
     <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
     <link rel="stylesheet" href="/styles.css">
-
-    <!--
-        These script tags are not allowed to run until *after* cookie consent is obtained.
-        Placed in the order in which they must be loaded when enabled.
-    -->
-    <script src="https://apis.google.com/js/api.js" type="javascript/blocked"></script>
-    <script src="https://accounts.google.com/gsi/client" async defer type="javascript/blocked"></script>
-    <script src="/youtubePlugin.js" type="javascript/blocked"></script>
-    <script src="/videoab.js" type="javascript/blocked"></script>
 </head>
 
 <body>
-    <!--Show for first time users-->
-    <div id="cookie-consent" class="autocenter">
-        <div class="autocenter">
-            <h1>Cookies</h1>
-            <p>Hi. This website, like most websites, uses cookies. Due to EU law, I have to ask you whether or not you
-                consent to me using cookies to store data in your browser.</p>
-            <p>This website uses two types of cookies.</p>
-
-            <h2>Strictly Necessary Cookies</h2>
-            <p>These cookies are required for the website to function. In this case, the <em>only</em> functional cookie
-                is one storing your preference on the next kind of cookie:</p>
-
-            <h2>Functionality Cookies</h2>
-            <p>These cookies are used to improve functionality of the website. This tool uses Functionality Cookies for
-                the following purposes:</p>
-            <ul>
-                <li>Google Account and User Status</li>
-            </ul>
-
-            <p>If you'd rather have this website place <em>no</em> cookies on your system, you may elect to leave the
-                website at this time. No cookies are placed on your system until you click the button below.</p>
-
-            <h2>Your Cookie Preferences:</h2>
-            <form id="cookie-form">
-                Strictly Necessary Cookies:
-                    <input type="checkbox" name="Strictly Necessary Cookies" disabled="true" checked>
-                Functionality Cookies:
-                    <input id="functionality-cookie-checkbox" type="checkbox" name="Functionality Cookies" checked>
-                <br>
-                <input type="button" value="Disable All" onclick="disableAllCookies()">
-                <input type="button" value="Save Preferences" onclick="saveCookiePreferences()">
-            </form>
-        </div>
-    </div>
-
     <!--Show for new users or users who have elected to not allow cookies.-->
-    <div id="google-auth" class="autocenter" style="display: none;">
+    <div id="google-auth" class="autocenter">
         <button onclick="getGoogleOauthToken()">Sign in with Google</button>
     </div>
 
     <!--Once the user is logged in, show the actual app.-->
     <div id="app" style="display: none;">
-        <div id="videolist"><!--This element is populated by Javascript.--></div>
+        <div id="videolist">
+            <!--This element is populated by Javascript.-->
+        </div>
         <!--TODO: Add infinite scroll to the video list.-->
         <div id="controlpanel">
             <h2>AB Testing Configuration</h2>
@@ -70,12 +28,13 @@
                 Titles: <input type="checkbox" name="Titles" id="titleCheckbox" checked><br>
                 *Thumbnails: <input type="checkbox" name="Thumbnails" id="thumbnailCheckbox"><br>
                 <h4>AB Testing Settings</h4>
-                Time between swaps: <input type="number" name="Swap Time" id="swapInterval" min="1" value="10"> minutes<br> 
+                Time between swaps: <input type="number" name="Swap Time" id="swapInterval" min="1" value="10">
+                minutes<br>
                 *<p>When both titles and thumbnails are being AB tested, would
-                you like to link them?</p>
+                    you like to link them?</p>
                 <p>When this is selected, title 1 and thumbnail 1 will be treated
-                as one configuration, and will be tested together. When this is
-                unselected, every combination of title and thumbnail will be tried.</p>
+                    as one configuration, and will be tested together. When this is
+                    unselected, every combination of title and thumbnail will be tried.</p>
                 <input type="checkbox" name="Link Properties"><br>
             </div>
             <div id="titlecontrol" class="settingspanel">
@@ -100,8 +59,11 @@
         </div>
     </div>
 
-    <!--Load cookie script only after everything else is loaded-->
-    <script src="/cookies.js"></script>
+    <!--Scripts are loaded last.-->
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="/youtubePlugin.js"></script>
+    <script src="/videoab.js"></script>
 </body>
 
 </html>
