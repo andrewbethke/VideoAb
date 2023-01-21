@@ -81,7 +81,7 @@ function populateVideos(response) {
     console.log(parsedResponse);
     for (let video of parsedResponse.items) {
         // Adds the video's response object to an object so it can be retrieved later.
-        fetchedVideos[video.contentDetails.videoId] = video;
+        fetchedVideos[video.id] = video;
         // Creates the list entry on the webpage.
         createVideoNode(video);
     }
@@ -154,8 +154,6 @@ function changeThumbnail(videoId, newThumbnail) {
 function changeTitle(videoId, newTitle) {
     let snippet = fetchedVideos[videoId].snippet;
     snippet.title = newTitle;
-    // TODO: Change to use the currently set category for the video.
-    snippet.categoryId = "20";
     gapi.client.youtube.videos.update({
         "part": [
             "snippet"
