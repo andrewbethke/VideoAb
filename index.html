@@ -65,12 +65,13 @@
             <h2>AB Testing Configuration</h2>
             <div id="generalcontrol" class="settingspanel">
                 <h3>General Settings</h3>
+                * Indicates a setting that has not yet been implemented; it does nothing.
                 <h4>Properties to AB Test:</h4>
-                Titles: <input type="checkbox" name="Titles" checked><br>
-                Note: All below settings are not yet implemented.<br>
-                Thumbnails: <input type="checkbox" name="Thumbnails"><br>
+                Titles: <input type="checkbox" name="Titles" id="titleCheckbox" checked><br>
+                *Thumbnails: <input type="checkbox" name="Thumbnails" id="thumbnailCheckbox"><br>
                 <h4>AB Testing Settings</h4>
-                <p>When both titles and thumbnails are being AB tested, would
+                Time between swaps: <input type="number" name="Swap Time" id="swapInterval" min="1" value="10"> minutes<br> 
+                *<p>When both titles and thumbnails are being AB tested, would
                 you like to link them?</p>
                 <p>When this is selected, title 1 and thumbnail 1 will be treated
                 as one configuration, and will be tested together. When this is
@@ -80,8 +81,8 @@
             <div id="titlecontrol" class="settingspanel">
                 <h3>Title Settings</h3>
                 Note: These settings will be ignored if you've selected not to AB test titles.<br>
-                Title 1: <input type="text"><br>
-                Title 2: <input type="text"><br>
+                Title 1: <input type="text" id="title1"><br>
+                Title 2: <input type="text" id="title2"><br>
                 <!--TODO: Implement the ability to add or remove an arbitrary number of titles.-->
             </div>
             <div id="thumbnailcontrol" class="settingspanel">
@@ -91,6 +92,10 @@
                 Thumbnail 1: <input type="file" accept="image/jpeg,image/png"><br>
                 Thumbnail 2: <input type="file" accept="image/jpeg,image/png"><br>
                 <!--TODO: Implement the ability to add or remove an arbitrary number of thumbnails.-->
+            </div>
+
+            <div class="settingspanel">
+                <button onclick="beginABTest()">Begin AB Test</button>
             </div>
         </div>
     </div>

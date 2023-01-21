@@ -4,6 +4,9 @@ videoAb.selected = "";
 
 const fetchedVideos = {};
 
+// Creates a constant we can multiply by to get a minute in milliseconds.
+const MINUTES = 1000 * 60;
+
 function logError(err) {
     console.log(err);
 }
@@ -166,11 +169,42 @@ function changeTitle(videoId, newTitle) {
 }
 
 /**
+ * @returns An Object representing the user's selected settings for the AB
+ * test.
+ */
+function getAbTestSettings(){
+    return {
+        "doTitles": document.getElementById("titleCheckbox").checked,
+        "doThumbnails": document.getElementById("thumbnailCheckbox").checked,
+        "interval": document.getElementById("swapInterval").value * MINUTES
+    };
+}
+
+/**
+ * Returns a List of all of the titles input by the user.
+ */
+function getTitles(){
+    //TODO: Figure out how to make this work regardless of how many titles the user has added.
+    return [document.getElementById("title1").value, document.getElementById("title2").value];
+}
+
+/**
  * Runs when the button in the control panel is pressed. Performs the necessary
  * setup to run an AB Test.
  */
 function beginABTest() {
     // TODO: Implement
+    const settings = getAbTestSettings();
+    if(settings.doTitles){
+        let accumlatedTimeout = 0;
+        for(let title of getTitles()){
+            setTimeout(() => {
+                changeTitle(videoAb.selected, title)
+            }, accumlatedTimeout);
+
+            accumlatedTimeout += settings.interval;
+        }
+    }
 }
 
 function setupApp() {

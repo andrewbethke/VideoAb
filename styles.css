@@ -123,7 +123,6 @@ h2 {
 
 .settingspanel {
     width: calc(67vw / 3);
-    height: 67vh;
     float: left;
     padding: 1rem;
 }
