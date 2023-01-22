@@ -176,6 +176,11 @@ function changeTitle(videoId, newTitle) {
     }).then(function (response) { console.log(response) }, logError);
 }
 
+function changeBoth(videoId, package){
+    changeTitle(videoId, package.title);
+    changeThumbnail(videoId, package.thumbnail);
+}
+
 /**
  * @returns An Object representing the user's selected settings for the AB
  * test.
@@ -184,6 +189,7 @@ function getAbTestSettings() {
     return {
         "doTitles": document.getElementById("titleCheckbox").checked,
         "doThumbnails": document.getElementById("thumbnailCheckbox").checked,
+        "linkProperties": document.getElementById("linkProperties").checked,
         "interval": document.getElementById("swapInterval").value * MINUTES
     };
 }
@@ -198,7 +204,7 @@ function getTitles() {
 
 function getThumbnails() {
     //TODO: Implement an arbitrary number of thumbnails.
-    return [document.getElementById("thumbnail1").value, document.getElementById("thumbnail2").value];
+    return [document.getElementById("thumbnail1").files[0], document.getElementById("thumbnail2").files[0]];
 }
 
 /**
@@ -225,7 +231,20 @@ function beginABTest() {
     // TODO: Implement
     const settings = getAbTestSettings();
     if (settings.doTitles && settings.doThumbnails) {
+        let items = [];
+        if(linkProperties){
+            let titles = getTitles();
+            let thumbnails = getThumbnails();
 
+            for(let i = 0; i < getTitles().length; i++){
+                items.push({"title": titles[i], "thumbnail": thumbnails[i]});
+            }
+        }else {
+            for(let thumbnail of getThumbnails())
+                for(let title of getTitles())
+                    items.push({"title": title, "thumbnail": thumbnail});
+        }
+        executeTest(changeBoth, settings, items);
     } else if (settings.doTitles) {
         executeTest(changeTitle, settings, getTitles());
     } else if (settings.doThumbnails) {
