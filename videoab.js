@@ -117,6 +117,7 @@ function requestPlaylistItems(playlistId, pageToken = null) {
     gapi.client.youtube.playlistItems.list({
         "playlistId": playlistId,
         "part": ["snippet,contentDetails"],
+        "maxResults": 10,
         "pageToken": pageToken
     }).then(requestVideos, logError);
 }
@@ -179,7 +180,7 @@ function changeTitle(videoId, newTitle) {
  * @returns An Object representing the user's selected settings for the AB
  * test.
  */
-function getAbTestSettings(){
+function getAbTestSettings() {
     return {
         "doTitles": document.getElementById("titleCheckbox").checked,
         "doThumbnails": document.getElementById("thumbnailCheckbox").checked,
@@ -190,9 +191,30 @@ function getAbTestSettings(){
 /**
  * Returns a List of all of the titles input by the user.
  */
-function getTitles(){
+function getTitles() {
     //TODO: Figure out how to make this work regardless of how many titles the user has added.
     return [document.getElementById("title1").value, document.getElementById("title2").value];
+}
+
+function getThumbnails() {
+    //TODO: Implement an arbitrary number of thumbnails.
+    return [document.getElementById("thumbnail1").value, document.getElementById("thumbnail2").value];
+}
+
+/**
+ * 
+ * @param {function} handler 
+ * @param {object} settings
+ * @param {list} items 
+ */
+function executeTest(handler, settings, items){
+    let accumlatedTimeout = 0;
+    for(let item of items){
+        setTimeout(() => {
+            handler(videoAb.selected, item);
+        }, accumlatedTimeout);
+        accumlatedTimeout += settings.interval;
+    }
 }
 
 /**
@@ -202,15 +224,12 @@ function getTitles(){
 function beginABTest() {
     // TODO: Implement
     const settings = getAbTestSettings();
-    if(settings.doTitles){
-        let accumlatedTimeout = 0;
-        for(let title of getTitles()){
-            setTimeout(() => {
-                changeTitle(videoAb.selected, title)
-            }, accumlatedTimeout);
+    if (settings.doTitles && settings.doThumbnails) {
 
-            accumlatedTimeout += settings.interval;
-        }
+    } else if (settings.doTitles) {
+        executeTest(changeTitle, settings, getTitles());
+    } else if (settings.doThumbnails) {
+        executeTest(changeThumbnail, settings, getThumbnails());
     }
 }
 
