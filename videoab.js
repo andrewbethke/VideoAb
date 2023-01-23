@@ -176,7 +176,7 @@ function changeTitle(videoId, newTitle) {
     }).then(function (response) { console.log(response) }, logError);
 }
 
-function changeBoth(videoId, package){
+function changeBoth(videoId, package) {
     changeTitle(videoId, package.title);
     changeThumbnail(videoId, package.thumbnail);
 }
@@ -213,9 +213,9 @@ function getThumbnails() {
  * @param {object} settings
  * @param {list} items 
  */
-function executeTest(handler, settings, items){
+function executeTest(handler, settings, items) {
     let accumlatedTimeout = 0;
-    for(let item of items){
+    for (let item of items) {
         setTimeout(() => {
             handler(videoAb.selected, item);
         }, accumlatedTimeout);
@@ -232,17 +232,17 @@ function beginABTest() {
     const settings = getAbTestSettings();
     if (settings.doTitles && settings.doThumbnails) {
         let items = [];
-        if(linkProperties){
+        if (linkProperties) {
             let titles = getTitles();
             let thumbnails = getThumbnails();
 
-            for(let i = 0; i < getTitles().length; i++){
-                items.push({"title": titles[i], "thumbnail": thumbnails[i]});
+            for (let i = 0; i < getTitles().length; i++) {
+                items.push({ "title": titles[i], "thumbnail": thumbnails[i] });
             }
-        }else {
-            for(let thumbnail of getThumbnails())
-                for(let title of getTitles())
-                    items.push({"title": title, "thumbnail": thumbnail});
+        } else {
+            for (let thumbnail of getThumbnails())
+                for (let title of getTitles())
+                    items.push({ "title": title, "thumbnail": thumbnail });
         }
         executeTest(changeBoth, settings, items);
     } else if (settings.doTitles) {

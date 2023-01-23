@@ -3,7 +3,8 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     position: absolute;
     left: 0;
     top: 0;
@@ -12,7 +13,8 @@ html, body {
     overflow-x: hidden;
 }
 
-p, ul {
+p,
+ul {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
