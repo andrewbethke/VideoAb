@@ -196,13 +196,16 @@ function getAbTestSettings() {
  * Returns a List of all of the titles input by the user.
  */
 function getTitles() {
-    //TODO: Figure out how to make this work regardless of how many titles the user has added.
-    return [document.getElementById("title1").value, document.getElementById("title2").value];
+    let titleInputs = document.getElementById("title-inputs")
+    let inputsOnly = Array.from(titleInputs.children).filter((element) => element.tagName == "INPUT");
+    let titles = [];
+    inputsOnly.forEach((item) => titles.push(item.value));
+    return titles;
 }
 
 function addTitle() {
     let newTitleLabel = document.createElement("span");
-    newTitleLabel.innerText = `Title ${Math.ceil(document.getElementById("title-inputs").children.length / 3)}: `;
+    newTitleLabel.innerText = `Title ${Math.floor(document.getElementById("title-inputs").children.length / 3) + 1}: `;
     let newTitleInput = document.createElement("input");
     newTitleInput.type = "text";
     document.getElementById("title-inputs").appendChild(newTitleLabel);
