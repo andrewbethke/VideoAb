@@ -200,6 +200,21 @@ function getTitles() {
     return [document.getElementById("title1").value, document.getElementById("title2").value];
 }
 
+function addTitle() {
+    let newTitleLabel = document.createElement("span");
+    newTitleLabel.innerText = `Title ${Math.ceil(document.getElementById("title-inputs").children.length / 3)}: `;
+    let newTitleInput = document.createElement("input");
+    newTitleInput.type = "text";
+    document.getElementById("title-inputs").appendChild(newTitleLabel);
+    document.getElementById("title-inputs").appendChild(newTitleInput);
+    document.getElementById("title-inputs").appendChild(document.createElement("br"));
+}
+
+function removeTitle() {
+    for(let i = 0; i < 3; i++)
+        document.getElementById("title-inputs").removeChild(document.getElementById("title-inputs").lastChild);
+}
+
 function getThumbnails() {
     //TODO: Implement an arbitrary number of thumbnails.
     return [document.getElementById("thumbnail1").files[0], document.getElementById("thumbnail2").files[0]];
