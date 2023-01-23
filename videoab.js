@@ -17,7 +17,6 @@ function logError(err) {
  * @param {String} videoId 
  */
 function selectVideo(videoId) {
-    console.log(videoId);
     // Clear visual selection of old video.
     if (videoAb.selected != "")
         document.getElementById(videoAb.selected).removeAttribute("style");
@@ -81,7 +80,6 @@ function createVideoNode(video) {
  */
 function populateVideos(response) {
     let parsedResponse = JSON.parse(response.body);
-    console.log(parsedResponse);
     for (let video of parsedResponse.items) {
         // Adds the video's response object to an object so it can be retrieved later.
         fetchedVideos[video.id] = video;
@@ -228,28 +226,30 @@ function executeTest(handler, settings, items) {
  * setup to run an AB Test.
  */
 function beginABTest() {
-    // TODO: Implement
     const settings = getAbTestSettings();
     if (settings.doTitles && settings.doThumbnails) {
         let items = [];
-        if (linkProperties) {
+        if (settings.linkProperties) {
+            // If we want to treat a thumbnail and title as pairs, then we
+            // only have one level of loop to create the pairs.
             let titles = getTitles();
             let thumbnails = getThumbnails();
 
-            for (let i = 0; i < getTitles().length; i++) {
+            for (let i = 0; i < titles.length; i++) {
                 items.push({ "title": titles[i], "thumbnail": thumbnails[i] });
             }
         } else {
+            // If we don't want to pair titles and thumbnails, we generate all
+            // combinations using a nested loop.
             for (let thumbnail of getThumbnails())
                 for (let title of getTitles())
                     items.push({ "title": title, "thumbnail": thumbnail });
         }
         executeTest(changeBoth, settings, items);
-    } else if (settings.doTitles) {
+    } else if (settings.doTitles)
         executeTest(changeTitle, settings, getTitles());
-    } else if (settings.doThumbnails) {
+    else if (settings.doThumbnails)
         executeTest(changeThumbnail, settings, getThumbnails());
-    }
 }
 
 function setupApp() {
