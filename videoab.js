@@ -174,6 +174,11 @@ function changeTitle(videoId, newTitle) {
     }).then(function (response) { console.log(response) }, logError);
 }
 
+/**
+ * Changes both the title and the thumbnail of the given video.
+ * @param {String} videoId the ID of the video whose details we're changing.
+ * @param {Object} package a JS Object containing the new details.
+ */
 function changeBoth(videoId, package) {
     changeTitle(videoId, package.title);
     changeThumbnail(videoId, package.thumbnail);
@@ -196,18 +201,31 @@ function getAbTestSettings() {
  * Returns a List of all of the titles input by the user.
  */
 function getTitles() {
-    let titleInputs = document.getElementById("title-inputs")
-    let inputsOnly = Array.from(titleInputs.children).filter((element) => element.tagName == "INPUT");
     let titles = [];
-    inputsOnly.forEach((item) => titles.push(item.value));
+
+    // Get the parent element for the titles and get an Array of the children.
+    Array.from(document.getElementById("title-inputs").children)
+        // Throw away the elements that aren't <input> tags.
+        .filter((element) => element.tagName == "INPUT")
+        // Add each remaining tag to the list of titles.
+        .forEach((item) => titles.push(item.value));
+    
     return titles;
 }
 
+/**
+ * Adds the necessary DOM objects to have another title box.
+ */
 function addTitle() {
+    // Make and fill a span to contain the label text of the new title box.
     let newTitleLabel = document.createElement("span");
     newTitleLabel.innerText = `Title ${Math.floor(document.getElementById("title-inputs").children.length / 3) + 1}: `;
+
+    // Make an input that is the new title box.
     let newTitleInput = document.createElement("input");
     newTitleInput.type = "text";
+
+    // Add the previous two elements and a line break to the title-inputs container.
     document.getElementById("title-inputs").appendChild(newTitleLabel);
     document.getElementById("title-inputs").appendChild(newTitleInput);
     document.getElementById("title-inputs").appendChild(document.createElement("br"));
