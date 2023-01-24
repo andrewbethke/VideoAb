@@ -237,8 +237,37 @@ function removeTitle() {
 }
 
 function getThumbnails() {
-    //TODO: Implement an arbitrary number of thumbnails.
-    return [document.getElementById("thumbnail1").files[0], document.getElementById("thumbnail2").files[0]];
+    let thumbnails = [];
+
+    // Get the parent element for the titles and get an Array of the children.
+    Array.from(document.getElementById("thumbnail-inputs").children)
+        // Throw away the elements that aren't <input> tags.
+        .filter((element) => element.tagName == "INPUT")
+        // Add each remaining tag to the list of titles.
+        .forEach((item) => thumbnails.push(item.files[0]));
+    
+    return thumbnails;
+}
+
+function addThumbnail() {
+    // Make and fill a span to contain the label text of the new thumbnail box.
+    let newThumbnailLabel = document.createElement("span");
+    newThumbnailLabel.innerText = `Thumbnail ${Math.floor(document.getElementById("thumbnail-inputs").children.length / 3) + 1}: `;
+
+    // Make an input that is the new thumbnail box.
+    let newThumbnailInput = document.createElement("input");
+    newThumbnailInput.type = "file";
+    newThumbnailInput.accept = "image/jpeg,image/png";
+
+    // Add the previous two elements and a line break to the title-inputs container.
+    document.getElementById("thumbnail-inputs").appendChild(newThumbnailLabel);
+    document.getElementById("thumbnail-inputs").appendChild(newThumbnailInput);
+    document.getElementById("thumbnail-inputs").appendChild(document.createElement("br"));
+}
+
+function removeThumbnail() {
+    for(let i = 0; i < 3; i++)
+        document.getElementById("thumbnail-inputs").removeChild(document.getElementById("thumbnail-inputs").lastChild);
 }
 
 /**

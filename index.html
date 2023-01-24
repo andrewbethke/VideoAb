@@ -45,16 +45,16 @@
                 </div>
                 <button id="add-title" onclick="addTitle()">+</button>
                 <button id="remove-title" onclick="removeTitle()">-</button>
-                <!--TODO: Implement the ability to add or remove an arbitrary number of titles.-->
             </div>
             <div id="thumbnailcontrol" class="settingspanel">
                 <h3>Thumbnail Settings</h3>
                 Note: These settings will be ignored if you've selected not to AB test thumbnails.<br>
                 <div id="thumbnail-inputs">
-                    Thumbnail 1: <input type="file" accept="image/jpeg,image/png" id="thumbnail1"><br>
-                    Thumbnail 2: <input type="file" accept="image/jpeg,image/png" id="thumbnail2"><br>
+                    <span>Thumbnail 1: </span><input type="file" accept="image/jpeg,image/png" id="thumbnail1"><br>
+                    <span>Thumbnail 2: </span><input type="file" accept="image/jpeg,image/png" id="thumbnail2"><br>
                 </div>
-                <!--TODO: Implement the ability to add or remove an arbitrary number of thumbnails.-->
+                <button id="add-thumbnail" onclick="addThumbnail()">+</button>
+                <button id="remove-thumbnail" onclick="removeThumbnail()">-</button>
             </div>
 
             <div class="settingspanel">
