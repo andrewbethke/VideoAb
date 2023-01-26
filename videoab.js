@@ -313,6 +313,12 @@ function executeTest(handler, settings, items) {
  * setup to run an AB Test.
  */
 function beginABTest() {
+    // Check to make sure a video is selected. If one isn't, tell the user and return.
+    if(videoAb.selected === ""){
+        alert("Whoopsies! You forgot to select a video to AB test on. You need to do that first.");
+        return;
+    }
+
     const settings = getAbTestSettings();
     if (settings.doTitles && settings.doThumbnails) {
         let items = [];
