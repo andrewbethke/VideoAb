@@ -1,6 +1,7 @@
 // Initialize videoAb object.
 const videoAb = {};
 videoAb.selected = "";
+videoAb.videoList = document.getElementById("videolist");
 
 const fetchedVideos = {};
 
@@ -10,6 +11,18 @@ const MINUTES = 1000 * 60;
 function logError(err) {
     console.log(err);
 }
+
+function infiniteScrollHandler(entries){
+    if(videoAb.nextVideoPageToken == undefined)
+        return;
+
+    if(entries[0].isIntersecting){
+        requestPlaylistItems(videoAb.playlistId, videoAb.nextVideoPageToken);
+    }
+}
+
+let scrollObserver = new IntersectionObserver(infiniteScrollHandler);
+scrollObserver.observe(document.getElementById("loading-box"));
 
 /**
  * Runs when a video in the video list is clicked. Changes styling of the video
@@ -72,13 +85,15 @@ function createVideoNode(video) {
     link.classList.add("videolistitemlink");
     info.appendChild(link);
 
-    document.getElementById("videolist").appendChild(div);
+    videoAb.videoList.appendChild(div);
 }
 
 /**
  * Takes an API response and populates the video list with them.
  */
 function populateVideos(response) {
+    let loadingBox = videoAb.videoList.removeChild(document.getElementById("loading-box"));
+
     let parsedResponse = JSON.parse(response.body);
     for (let video of parsedResponse.items) {
         // Adds the video's response object to an object so it can be retrieved later.
@@ -86,6 +101,9 @@ function populateVideos(response) {
         // Creates the list entry on the webpage.
         createVideoNode(video);
     }
+
+    if(videoAb.nextVideoPageToken != undefined)
+        videoAb.videoList.appendChild(loadingBox);
 }
 
 /**
@@ -94,6 +112,9 @@ function populateVideos(response) {
  */
 function requestVideos(response) {
     let parsedResponse = JSON.parse(response.body);
+
+    videoAb.nextVideoPageToken = parsedResponse.nextPageToken;
+
     let videoIdList = "";
     for (let video of parsedResponse.items) {
         videoIdList = videoIdList + video.contentDetails.videoId + ",";
@@ -136,7 +157,8 @@ function getUploadsPlaylist(response) {
  * @param response The response given by channels.list.
  */
 function handleChannelResponse(response) {
-    requestPlaylistItems(getUploadsPlaylist(response));
+    videoAb.playlistId = getUploadsPlaylist(response)
+    requestPlaylistItems(videoAb.playlistId);
 }
 
 /**

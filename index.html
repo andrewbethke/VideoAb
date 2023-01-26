@@ -15,10 +15,12 @@
 
     <!--Once the user is logged in, show the actual app.-->
     <div id="app" style="display: none;">
-        <div id="videolist">
+        <div id="videolist" onscroll="infiniteScrollHandler()">
             <!--This element is populated by Javascript.-->
+            <div id="loading-box" class="videolistitem">
+                <img src="/loadingwheel.svg" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+            </div>
         </div>
-        <!--TODO: Add infinite scroll to the video list.-->
         <div id="controlpanel">
             <h2>AB Testing Configuration</h2>
             <div id="generalcontrol" class="settingspanel">
