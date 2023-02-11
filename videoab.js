@@ -348,7 +348,7 @@ function beginABTest() {
 function setupApp() {
     // Hide authentication, show the app.
     document.getElementById("google-auth").style.display = "none"
-    document.getElementById("app").style.display = "block";
+    document.getElementById("app").style.display = "";
     // Request the channel's information to retrieve the uploads playlist id.
     gapi.client.youtube.channels.list({
         "part": ["contentDetails"],

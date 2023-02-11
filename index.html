@@ -15,13 +15,13 @@
 
     <!--Once the user is logged in, show the actual app.-->
     <div id="app" style="display: none;">
-        <div id="videolist" onscroll="infiniteScrollHandler()">
+        <div id="videolist" class="app-panel" onscroll="infiniteScrollHandler()">
             <!--This element is populated by Javascript.-->
             <div id="loading-box" class="videolistitem">
                 <img src="/loadingwheel.svg" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
             </div>
         </div>
-        <div id="controlpanel">
+        <div id="controlpanel" class="app-panel">
             <h2>AB Testing Configuration</h2>
             <div id="generalcontrol" class="settingspanel">
                 <h3>General Settings</h3>
