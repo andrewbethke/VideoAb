@@ -69,8 +69,6 @@ header {
     grid-template-rows: 1;
     gap: 1vmin;
     padding: 1vmin;
-
-    background-color: #35c914;
 }
 
 .app-panel {
