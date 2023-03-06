@@ -47,11 +47,15 @@ h2 {
     font-weight: bold;
 }
 
-#cookie-consent {
-    width: 50vw;
-    height: 30vw;
-    border: 3px solid #222;
-    border-radius: 5rem;
+header {
+    height: 5vh;
+    width: 100vw;
+    border-bottom: 0.1rem solid #AAAAAA;
+}
+
+#logo {
+    margin: 0.25rem;
+    height: calc(5vh - 0.5rem);
 }
 
 #google-auth {
@@ -63,9 +67,7 @@ h2 {
     display: grid;
     grid-template-columns: 2;
     grid-template-rows: 1;
-
     gap: 1vmin;
-
     padding: 1vmin;
 
     background-color: #35c914;
