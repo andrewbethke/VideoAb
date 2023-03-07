@@ -17,30 +17,6 @@ async function loadApiKey() {
         });
 }
 
-function loadGoogleApis() {
-    // TODO: Reimplement to use CORS
-}
-
-/**
- * Test function from google examples for YouTube API
- * @returns
- */
-function execute() {
-    return gapi.client.youtube.channels.list({
-        "part": [
-            "snippet,contentDetails,statistics"
-        ],
-        "mine": true
-    })
-        .then(function (response) {
-            // Handle the results here (response.result has the parsed body).
-            console.log("Response", response);
-        },
-            function (err) { console.error("Execute error", err); });
-}
-
-
-
 /**
  * Get a Google OAuth token and give it to gapi.
  */
