@@ -54,8 +54,8 @@
                     <span>Title 1: </span><input type="text" id="title1" maxlength="100"><br>
                     <span>Title 2: </span><input type="text" id="title2" maxlength="100"><br>
                 </div>
-                <button id="add-title" onclick="addTitle()">+</button>
-                <button id="remove-title" onclick="removeTitle()">-</button>
+                <button id="add-title" class="small-button" onclick="addTitle()">+</button>
+                <button id="remove-title" class="small-button" onclick="removeTitle()">-</button>
             </div>
             <div id="thumbnailcontrol" class="settingspanel">
                 <h3>Thumbnail Settings</h3>
@@ -64,12 +64,12 @@
                     <span>Thumbnail 1: </span><input type="file" accept="image/jpeg,image/png" id="thumbnail1"><br>
                     <span>Thumbnail 2: </span><input type="file" accept="image/jpeg,image/png" id="thumbnail2"><br>
                 </div>
-                <button id="add-thumbnail" onclick="addThumbnail()">+</button>
-                <button id="remove-thumbnail" onclick="removeThumbnail()">-</button>
+                <button id="add-thumbnail" class="small-button" onclick="addThumbnail()">+</button>
+                <button id="remove-thumbnail" class="small-button" onclick="removeThumbnail()">-</button>
             </div>
 
             <div class="settingspanel">
-                <button onclick="beginABTest()">Begin AB Test</button>
+                <button onclick="beginABTest()" class="big-button">Begin AB Test</button>
             </div>
         </div>
         <!-- TODO: Implement a preview of what the video will look like on YouTube with all the thumbnail/title combinations.
