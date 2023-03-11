@@ -22,6 +22,7 @@
     <!--Once the user is logged in, show the actual app.-->
     <div id="app" style="display: none;">
         <div id="video-panel" class="app-panel" onscroll="infiniteScrollHandler()">
+            <h2>Videos</h2>
             <div id="video-list">
             <!--This element is populated by Javascript.-->
             <div id="loading-box" class="videolistitem">
@@ -50,8 +51,8 @@
                 <h3>Title Settings</h3>
                 Note: These settings will be ignored if you've selected not to AB test titles.<br>
                 <div id="title-inputs">
-                    <span>Title 1: </span><input type="text" id="title1"><br>
-                    <span>Title 2: </span><input type="text" id="title2"><br>
+                    <span>Title 1: </span><input type="text" id="title1" maxlength="100"><br>
+                    <span>Title 2: </span><input type="text" id="title2" maxlength="100"><br>
                 </div>
                 <button id="add-title" onclick="addTitle()">+</button>
                 <button id="remove-title" onclick="removeTitle()">-</button>

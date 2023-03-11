@@ -246,6 +246,7 @@ function addTitle() {
     // Make an input that is the new title box.
     let newTitleInput = document.createElement("input");
     newTitleInput.type = "text";
+    newTitleInput.maxLength = 100;
 
     // Add the previous two elements and a line break to the title-inputs container.
     document.getElementById("title-inputs").appendChild(newTitleLabel);
