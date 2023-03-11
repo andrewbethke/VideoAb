@@ -17,12 +17,20 @@ async function loadApiKey() {
         });
 }
 
+async function loadClientId() {
+    await fetch("./clientid.txt")
+        .then(response => response.text())
+        .then(id => {
+            CLIENT_ID = id;
+        })
+}
+
 /**
  * Get a Google OAuth token and give it to gapi.
  */
 function getGoogleOauthToken() {
     const googleOauthClient = google.accounts.oauth2.initTokenClient({
-        client_id: '50007999406-7vr8taktahml4loqt67aeuutn96mpofg.apps.googleusercontent.com',
+        client_id: CLIENT_ID,
         scope: 'https://www.googleapis.com/auth/youtube',
         callback: (response) => {
             gapi.client.setToken(response)
@@ -36,13 +44,12 @@ function getGoogleOauthToken() {
  * Once gapi has loaded, set up gapi and load necessary scopes.
  */
 function setupGapi() {
-    gapi.client.setApiKey(API_KEY);
-
     gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
         .then(function () { console.log("GAPI client loaded for API"); },
             function (err) { console.error("Error loading GAPI client for API", err); });
 
     loadApiKey();
+    loadClientId();
 }
 
 /**
@@ -63,7 +70,7 @@ function getGoogleOauthTokenOneTap(credential){
     gapi.auth2.authorize({
         response_type: 'permission', // Access Token.
         scope: 'https://www.googleapis.com/auth/youtube',
-        client_id: '50007999406-7vr8taktahml4loqt67aeuutn96mpofg.apps.googleusercontent.com',
+        client_id: CLIENT_ID,
         login_hint: credential
     }, function(result) {console.log(result)});
 }
@@ -78,7 +85,7 @@ function handleGoogleCredentials(response){
  */
 function setupGoogleIdentity() {
     google.accounts.id.initialize({
-        client_id: '50007999406-7vr8taktahml4loqt67aeuutn96mpofg.apps.googleusercontent.com',
+        client_id: CLIENT_ID,
         callback: handleGoogleCredentials
     });
 
