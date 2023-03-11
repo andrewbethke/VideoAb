@@ -59,4 +59,31 @@ function loadGapi() {
     gapi.load('client', setupGapi);
 }
 
+function getGoogleOauthTokenOneTap(credential){
+    gapi.auth2.authorize({
+        response_type: 'permission', // Access Token.
+        scope: 'https://www.googleapis.com/auth/youtube',
+        client_id: '50007999406-7vr8taktahml4loqt67aeuutn96mpofg.apps.googleusercontent.com',
+        login_hint: credential
+    }, function(result) {console.log(result)});
+}
+
+function handleGoogleCredentials(response){
+    console.log(response);
+    getGoogleOauthTokenOneTap(response.clientId);
+}
+
+/**
+ * Setup Google Identity API
+ */
+function setupGoogleIdentity() {
+    google.accounts.id.initialize({
+        client_id: '50007999406-7vr8taktahml4loqt67aeuutn96mpofg.apps.googleusercontent.com',
+        callback: handleGoogleCredentials
+    });
+
+    const parent = document.getElementById('google-signin-button');
+    google.accounts.id.renderButton(parent, {theme: "filled_blue", shape:"pill", context: "use"});
+}
+
 loadGapi();
