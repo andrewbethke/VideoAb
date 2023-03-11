@@ -21,10 +21,12 @@
 
     <!--Once the user is logged in, show the actual app.-->
     <div id="app" style="display: none;">
-        <div id="videolist" class="app-panel" onscroll="infiniteScrollHandler()">
+        <div id="video-panel" class="app-panel" onscroll="infiniteScrollHandler()">
+            <div id="video-list">
             <!--This element is populated by Javascript.-->
             <div id="loading-box" class="videolistitem">
                 <img src="/loadingwheel.svg" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+            </div>
             </div>
         </div>
         <div id="controlpanel" class="app-panel">
@@ -69,9 +71,10 @@
                 <button onclick="beginABTest()">Begin AB Test</button>
             </div>
         </div>
+        <!-- TODO: Implement a preview of what the video will look like on YouTube with all the thumbnail/title combinations.
         <div id="preview-panel" class="app-panel">
             <h2>Preview</h2>
-        </div>
+        </div>-->
     </div>
 
     <!--Scripts are loaded last.-->

@@ -1,7 +1,7 @@
 // Initialize videoAb object.
 const videoAb = {};
 videoAb.selected = "";
-videoAb.videoList = document.getElementById("videolist");
+videoAb.videoList = document.getElementById("video-list");
 
 const fetchedVideos = {};
 
