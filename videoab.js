@@ -308,22 +308,6 @@ function removeThumbnail() {
 }
 
 /**
- * 
- * @param {function} handler 
- * @param {object} settings
- * @param {list} items 
- */
-function executeTest(handler, settings, items) {
-    let accumlatedTimeout = 0;
-    for (let item of items) {
-        setTimeout(() => {
-            handler(videoAb.selected, item);
-        }, accumlatedTimeout);
-        accumlatedTimeout += settings.interval;
-    }
-}
-
-/**
  * Generates all the valid combinations of thumbnails and titles given the current settings.
  * 
  * Returns an array of objects of class "VideoInfo"
@@ -365,7 +349,7 @@ function generateCombinations() {
  * Runs when the button in the control panel is pressed. Performs the necessary
  * setup to run an AB Test.
  */
-function beginABTest() {
+function runABTest() {
     // Check to make sure a video is selected. If one isn't, tell the user and return.
     if (videoAb.selected === "") {
         alert("Whoopsies! You forgot to select a video to AB test on. You need to do that first.");
@@ -374,8 +358,14 @@ function beginABTest() {
 
     const settings = getAbTestSettings();
     let items = generateCombinations();
-    
-    executeTest(changeInfo, settings, items);
+    let accumlatedTimeout = 0;
+
+    for (let item of items) {
+        setTimeout(() => {
+            changeInfo(videoAb.selected, item);
+        }, accumlatedTimeout);
+        accumlatedTimeout += settings.interval;
+    }
 }
 
 function setupApp() {
