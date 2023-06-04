@@ -8,15 +8,27 @@ const fetchedVideos = {};
 // Creates a constant we can multiply by to get a minute in milliseconds.
 const MINUTES = 1000 * 60;
 
+
+/**
+ * Contains video title and thumbnail. Used for sending video info between functions.
+ */
+class VideoInfo {
+    constructor(title, thumbnail) {
+        this.title = title;
+        this.thumbnail = thumbnail;
+    }
+}
+
+
 function logError(err) {
     console.log(err);
 }
 
-function infiniteScrollHandler(entries){
-    if(videoAb.nextVideoPageToken == undefined)
+function infiniteScrollHandler(entries) {
+    if (videoAb.nextVideoPageToken == undefined)
         return;
 
-    if(entries[0].isIntersecting){
+    if (entries[0].isIntersecting) {
         requestPlaylistItems(videoAb.playlistId, videoAb.nextVideoPageToken);
     }
 }
@@ -102,7 +114,7 @@ function populateVideos(response) {
         createVideoNode(video);
     }
 
-    if(videoAb.nextVideoPageToken != undefined)
+    if (videoAb.nextVideoPageToken != undefined)
         videoAb.videoList.appendChild(loadingBox);
 }
 
@@ -201,9 +213,11 @@ function changeTitle(videoId, newTitle) {
  * @param {String} videoId the ID of the video whose details we're changing.
  * @param {Object} package a JS Object containing the new details.
  */
-function changeBoth(videoId, package) {
-    changeTitle(videoId, package.title);
-    changeThumbnail(videoId, package.thumbnail);
+function changeInfo(videoId, package) {
+    if(package.title != null)
+        changeTitle(videoId, package.title);
+    if(package.thumbnail != null)
+        changeThumbnail(videoId, package.thumbnail);
 }
 
 /**
@@ -231,7 +245,7 @@ function getTitles() {
         .filter((element) => element.tagName == "INPUT")
         // Add each remaining tag to the list of titles.
         .forEach((item) => titles.push(item.value));
-    
+
     return titles;
 }
 
@@ -255,7 +269,7 @@ function addTitle() {
 }
 
 function removeTitle() {
-    for(let i = 0; i < 3; i++)
+    for (let i = 0; i < 3; i++)
         document.getElementById("title-inputs").removeChild(document.getElementById("title-inputs").lastChild);
 }
 
@@ -268,7 +282,7 @@ function getThumbnails() {
         .filter((element) => element.tagName == "INPUT")
         // Add each remaining tag to the list of titles.
         .forEach((item) => thumbnails.push(item.files[0]));
-    
+
     return thumbnails;
 }
 
@@ -289,7 +303,7 @@ function addThumbnail() {
 }
 
 function removeThumbnail() {
-    for(let i = 0; i < 3; i++)
+    for (let i = 0; i < 3; i++)
         document.getElementById("thumbnail-inputs").removeChild(document.getElementById("thumbnail-inputs").lastChild);
 }
 
@@ -310,19 +324,15 @@ function executeTest(handler, settings, items) {
 }
 
 /**
- * Runs when the button in the control panel is pressed. Performs the necessary
- * setup to run an AB Test.
+ * Generates all the valid combinations of thumbnails and titles given the current settings.
+ * 
+ * Returns an array of objects of class "VideoInfo"
  */
-function beginABTest() {
-    // Check to make sure a video is selected. If one isn't, tell the user and return.
-    if(videoAb.selected === ""){
-        alert("Whoopsies! You forgot to select a video to AB test on. You need to do that first.");
-        return;
-    }
-
+function generateCombinations() {
     const settings = getAbTestSettings();
+    let items = [];
+
     if (settings.doTitles && settings.doThumbnails) {
-        let items = [];
         if (settings.linkProperties) {
             // If we want to treat a thumbnail and title as pairs, then we
             // only have one level of loop to create the pairs.
@@ -330,20 +340,42 @@ function beginABTest() {
             let thumbnails = getThumbnails();
 
             for (let i = 0; i < titles.length; i++) {
-                items.push({ "title": titles[i], "thumbnail": thumbnails[i] });
+                items.push(new VideoInfo(titles[i], thumbnails[i]));
             }
         } else {
             // If we don't want to pair titles and thumbnails, we generate all
             // combinations using a nested loop.
             for (let thumbnail of getThumbnails())
                 for (let title of getTitles())
-                    items.push({ "title": title, "thumbnail": thumbnail });
+                    items.push(new VideoInfo(title, thumbnail));
         }
-        executeTest(changeBoth, settings, items);
     } else if (settings.doTitles)
-        executeTest(changeTitle, settings, getTitles());
+        for (let title of getTitles()) {
+            items.push(new VideoInfo(title, null))
+        }
     else if (settings.doThumbnails)
-        executeTest(changeThumbnail, settings, getThumbnails());
+        for (let thumbnail of getThumbnails()) {
+            items.push(new VideoInfo(null, thumbnail))
+        }
+
+    return items;
+}
+
+/**
+ * Runs when the button in the control panel is pressed. Performs the necessary
+ * setup to run an AB Test.
+ */
+function beginABTest() {
+    // Check to make sure a video is selected. If one isn't, tell the user and return.
+    if (videoAb.selected === "") {
+        alert("Whoopsies! You forgot to select a video to AB test on. You need to do that first.");
+        return;
+    }
+
+    const settings = getAbTestSettings();
+    let items = generateCombinations();
+    
+    executeTest(changeInfo, settings, items);
 }
 
 function setupApp() {
