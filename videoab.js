@@ -345,6 +345,30 @@ function generateCombinations() {
     return items;
 }
 
+function generatePreviewDOM(package){
+    let wrapper = document.createElement("div");
+    wrapper.classList.add("preview");
+    
+    let thumbnail = document.createElement("img");
+    thumbnail.src = URL.createObjectURL(package.thumbnail);
+    thumbnail.classList.add("preview-thumbnail")
+    wrapper.append(thumbnail);
+
+    let title = document.createElement("span");
+    title.innerText = package.title;
+    title.classList.add("preview-title");
+    wrapper.append(title);
+
+    return wrapper;
+}
+
+function generatePreviews(){
+    document.getElementById("preview-list").innerHTML = "";
+    for(let combination of generateCombinations()){
+        document.getElementById("preview-list").appendChild(generatePreviewDOM(combination));
+    }
+}
+
 /**
  * Runs when the button in the control panel is pressed. Performs the necessary
  * setup to run an AB Test.

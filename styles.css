@@ -169,3 +169,36 @@ header {
     grid-column: 2;
     grid-row: 2;
 }
+
+#preview-list {
+    width: 100%;
+    height: 80%;
+    padding-left: 4%;
+}
+
+.preview {
+    width: 16%;
+    margin-right: 4%;
+    float: left;
+}
+
+.preview-thumbnail {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+}
+
+.preview-title {
+    font-family: "Roboto","Arial",sans-serif;
+    font-size: 14px;
+    line-height: 28px;
+    font-weight: 500;
+    overflow: hidden;
+    display: block;
+    max-height: 56px;
+    -webkit-line-clamp: 2;
+    display: box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
