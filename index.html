@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>VideoAb</title>
+    <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+    <link rel="stylesheet" href="/styles/shared.css">
+    <style>
+        #big-header {
+            height: 67vh;
+        }
+
+        #small-header {
+            position: fixed;
+            opacity: 0;
+            transition-duration: 0.2s;
+            transition-property: opacity;
+            transition-timing-function: ease-in-out;
+            top: 0;
+        }
+        #small-header.visible {
+            opacity: 1;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <header id="big-header">
+        <img id="big-logo" class="autocenter" width="75%" src="logo.svg">
+    </header>
+    <header id="small-header">
+        <img id="logo" height="100%" src="logo.svg">
+    </header>
+    <div style="width:100vw; height:100vw;border-top:3px solid black;"></div>
+
+    <!--Scripts are loaded last.-->
+    <script src="/transition.js"></script>
+</body>
+
+</html>

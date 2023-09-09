@@ -1,0 +1,26 @@
+* {
+    position: relative;
+    box-sizing: border-box;
+    --border-color: #AAA;
+    --brand-color: #35c914;
+    --bg-color: #e1edde;
+}
+
+.autocenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+header {
+    height: 5vh;
+    width: 100vw;
+    border-bottom: 0.1rem solid var(--border-color);
+    background-color: white;
+}
+
+#logo {
+    margin: 0.25rem;
+    height: calc(5vh - 0.5rem);
+}
