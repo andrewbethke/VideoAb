@@ -4,6 +4,7 @@
     --border-color: #AAA;
     --brand-color: #35c914;
     --bg-color: #e1edde;
+    max-width: 100vw;
 }
 
 .autocenter {
@@ -16,7 +17,6 @@
 header {
     height: 5vh;
     width: 100vw;
-    border-bottom: 0.1rem solid var(--border-color);
     background-color: white;
 }
 

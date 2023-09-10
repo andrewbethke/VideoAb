@@ -7,7 +7,24 @@
     <link rel="stylesheet" href="/styles/shared.css">
     <style>
         #big-header {
+            width: 100vw;
             height: 67vh;
+            background-color: #4b6543;
+            border: 0;
+        }
+
+        #header-logo {
+            height: 100%;
+        }
+
+        #big-header h1 {
+            font-family: Raleway, sans-serif;
+            font-size: 33vh;
+            color: white;
+            position: absolute;
+            top:22vh;
+            left: 67%;
+            transform: translateX(-67%);
         }
 
         #small-header {
@@ -17,18 +34,32 @@
             transition-property: opacity;
             transition-timing-function: ease-in-out;
             top: 0;
+            border-bottom: 0.1rem solid var(--border-color);
         }
+
         #small-header.visible {
             opacity: 1;
         }
-
-
     </style>
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&family=Roboto:wght@500&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header id="big-header">
-        <img id="big-logo" class="autocenter" width="75%" src="logo.svg">
+        <svg id="header-logo" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 30 20" xml:space="preserve">
+            <polygon points="0,0 25.981,15 0,30" style="fill:#35c914; stroke: 2; stroke-linejoin: round;"></polygon>
+            <g style="stroke: #FFFFFF; stroke-width: 1; stroke-linecap: round;">
+                <line class="st" x1="4.1" y1="9.9" x2="11.6" y2="22.9"></line>
+                <line class="st" x1="2.4" y1="16.9" x2="11.1" y2="11.9"></line>
+                <line class="st" x1="4.8" y1="21" x2="13.4" y2="16"></line>
+            </g>
+        </svg>
+        <h1>VideoAb</h1>
+
+        <!--<img id="big-logo" class="autocenter" width="75%" src="logo.svg">-->
     </header>
     <header id="small-header">
         <img id="logo" height="100%" src="logo.svg">
