@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/styles/shared.css">
     <style>
         #big-header {
-            width: 100vw;
+            width: 100%;
             height: 67vh;
             background-color: #4b6543;
             border: 0;
@@ -22,23 +22,24 @@
             font-size: 33vh;
             color: white;
             position: absolute;
-            top:22vh;
-            left: 67%;
-            transform: translateX(-67%);
-        }
-
-        #small-header {
-            position: fixed;
-            opacity: 0;
-            transition-duration: 0.2s;
-            transition-property: opacity;
-            transition-timing-function: ease-in-out;
-            top: 0;
-            border-bottom: 0.1rem solid var(--border-color);
+            top:16.5vh;
+            left: 70%;
+            transform: translateX(-70%);
         }
 
         #small-header.visible {
             opacity: 1;
+        }
+
+        section {
+            width: 100vw;
+            padding: 2vw 20vw;
+        }
+
+        section p {
+            font-size: 1.5em;
+            color: #333;
+            padding-bottom: 1.5em;
         }
     </style>
     <!--Google Fonts-->
@@ -49,8 +50,8 @@
 
 <body>
     <header id="big-header">
-        <svg id="header-logo" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 30 20" xml:space="preserve">
-            <polygon points="0,0 25.981,15 0,30" style="fill:#35c914; stroke: 2; stroke-linejoin: round;"></polygon>
+        <svg id="header-logo" x="0px" y="0px" viewBox="0 0 30 20">
+            <polygon points="0,0 25.981,15 0,30" style="fill:#35c914; stroke: #35c914; stroke-width: 2; stroke-linejoin: round;"></polygon>
             <g style="stroke: #FFFFFF; stroke-width: 1; stroke-linecap: round;">
                 <line class="st" x1="4.1" y1="9.9" x2="11.6" y2="22.9"></line>
                 <line class="st" x1="2.4" y1="16.9" x2="11.1" y2="11.9"></line>
@@ -58,16 +59,19 @@
             </g>
         </svg>
         <h1>VideoAb</h1>
-
-        <!--<img id="big-logo" class="autocenter" width="75%" src="logo.svg">-->
     </header>
-    <header id="small-header">
-        <img id="logo" height="100%" src="logo.svg">
-    </header>
-    <div style="width:100vw; height:100vw;border-top:3px solid black;"></div>
+    <section>
+        <p>The thumbnail is one of the most important parts of making a YouTube video successful. It is the first part of the video the viewer encounters,
+        so it has to count, and it has to beat every other creator who is playing the exact same thumbnail game with their own videos.</p>
+        
+        <p>The problem is that it can be <em>really</em> hard to know whether or not a thumbnail is, you know, good. And it's not like YouTube helps you to
+        select one! Their auto-generated thumbnails are just a frame pulled from the video with one of the site's <em>many</em> mysterious algorithms, and
+        their automatic thumbnail AB testing has only rolled out to a handful of creators.</p>
 
-    <!--Scripts are loaded last.-->
-    <script src="/transition.js"></script>
+        <p>Enter VideoAb. Simple automatic thumbnail and title AB testing. Just select the video to run the test on, put in your titles and thumbnails, and
+        press "Begin Test." Once the test is completed, you can look at your analytics and figure out which of your combinations performed the best. Is it
+        as seamless as YouTube's own offering will be? Nope! But it's available now, to everybody. No special treatment required.</p>
+    </section>
 </body>
 
 </html>
