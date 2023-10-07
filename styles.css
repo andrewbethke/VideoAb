@@ -1,11 +1,3 @@
-* {
-    position: relative;
-    box-sizing: border-box;
-    --border-color: #AAA;
-    --brand-color: #35c914;
-    --bg-color: #e1edde;
-}
-
 html,
 body {
     position: absolute;
@@ -56,25 +48,8 @@ h2 {
     font-size: 2rem;
 }
 
-button {
-    background-color: var(--brand-color);
-    color: white;
-    border-radius: 0.5rem;
-    border: 0;
-    font-family: "Raleway", sans-serif;
-    font-weight: bold;
-}
-
-.small-button {
-    width: 2rem;
-    height: 2rem;
-    font-size: 1.5rem;
-}
-
-.big-button {
-    min-width: 9rem;
-    height: 3rem;
-    font-size: 2rem;
+h3 {
+    font-family: "Roboto", "Arial", sans-serif;
 }
 
 header {

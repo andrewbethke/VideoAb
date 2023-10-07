@@ -6,10 +6,14 @@
     <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
     <link rel="stylesheet" href="/styles/shared.css">
     <style>
+        .dark-background {
+            color: #fff;
+            background-color: #4b6543;
+        }
+
         #big-header {
             width: 100%;
             height: 67vh;
-            background-color: #4b6543;
             border: 0;
         }
 
@@ -20,7 +24,7 @@
         #big-header h1 {
             font-family: Raleway, sans-serif;
             font-size: 33vh;
-            color: white;
+            color: #fff;
             position: absolute;
             top:16.5vh;
             left: 70%;
@@ -33,15 +37,15 @@
 
         section {
             width: 100vw;
-            padding: 2vw 20vw;
+            padding: 2vw 30vw;
+            color: #333;
         }
 
         section p {
-            font-size: 1.5em;
+            font-size: 1.2rem;
+            padding-bottom: 1.5rem;
             font-family: "Lora", "Times New Roman", serif;
-            color: #333;
-            line-height: 1.6em;
-            padding-bottom: 1.5em;
+            line-height: 1.4rem;
         }
     </style>
     <!--Google Fonts-->
@@ -51,7 +55,7 @@
 </head>
 
 <body>
-    <header id="big-header">
+    <header id="big-header" class="dark-background">
         <svg id="header-logo" x="0px" y="0px" viewBox="0 0 30 20">
             <polygon points="0,0 25.981,15 0,30" style="fill:#35c914; stroke: #35c914; stroke-width: 2; stroke-linejoin: round;"></polygon>
             <g style="stroke: #FFF; stroke-width: 1; stroke-linecap: round;">
@@ -72,7 +76,13 @@
 
         <p>Enter VideoAb. Simple automatic thumbnail and title AB testing. Just select the video to run the test on, put in your titles and thumbnails, and
         press "Begin Test." Once the test is completed, you can look at your analytics and figure out which of your combinations performed the best. Is it
-        as seamless as YouTube's own offering will be? Nope! But it's available now, to everybody. No special treatment required.</p>
+        as seamless as YouTube's own offering will be? Nope! Not even close! But it's available now, to everybody. No special treatment required.</p>
+    </section>
+    <section class="dark-background">
+        <p>Click the button below to get started. When you do so, it will prompt you to sign into your Google account and select the channel you want to use
+        with this tool. All of your information stays in your browser, and does not get sent to me, the creator of this app. The only way this information
+        is used is to enable interfacing with YouTube.</p>
+        <button class="big-button" onclick="getGoogleOauthToken()">Get Started</button>
     </section>
 </body>
 
