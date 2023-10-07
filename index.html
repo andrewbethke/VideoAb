@@ -26,7 +26,7 @@
             font-size: 33vh;
             color: #fff;
             position: absolute;
-            top:16.5vh;
+            top: 16.5vh;
             left: 70%;
             transform: translateX(-70%);
         }
@@ -40,13 +40,6 @@
             padding: 2vw 30vw;
             color: #333;
         }
-
-        section p {
-            font-size: 1.2rem;
-            padding-bottom: 1.5rem;
-            font-family: "Lora", "Times New Roman", serif;
-            line-height: 1.4rem;
-        }
     </style>
     <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,7 +50,8 @@
 <body>
     <header id="big-header" class="dark-background">
         <svg id="header-logo" x="0px" y="0px" viewBox="0 0 30 20">
-            <polygon points="0,0 25.981,15 0,30" style="fill:#35c914; stroke: #35c914; stroke-width: 2; stroke-linejoin: round;"></polygon>
+            <polygon points="0,0 25.981,15 0,30"
+                style="fill:#35c914; stroke: #35c914; stroke-width: 2; stroke-linejoin: round;"></polygon>
             <g style="stroke: #FFF; stroke-width: 1; stroke-linecap: round;">
                 <line class="st" x1="4.1" y1="9.9" x2="11.6" y2="22.9"></line>
                 <line class="st" x1="2.4" y1="16.9" x2="11.1" y2="11.9"></line>
@@ -67,22 +61,27 @@
         <h1>VideoAb</h1>
     </header>
     <section>
-        <p>The thumbnail is one of the most important parts of making a YouTube video successful. It is the first part of the video the viewer encounters,
-        so it has to count, and it has to beat every other creator who is playing the exact same thumbnail game with their own videos.</p>
-        
-        <p>The problem is that it can be <em>really</em> hard to know whether or not a thumbnail is, you know, good. And it's not like YouTube helps you to
-        select one! Their auto-generated thumbnails are just a frame pulled from the video with one of the site's <em>many</em> mysterious algorithms, and
-        their automatic thumbnail AB testing has only rolled out to a handful of creators.</p>
+        <p>The thumbnail is one of the most important parts of making a YouTube video successful. It is the first part
+            of the video the viewer encounters, so it has to count, and it has to beat every other creator who is
+            playing the exact same thumbnail game with their own videos.</p>
 
-        <p>Enter VideoAb. Simple automatic thumbnail and title AB testing. Just select the video to run the test on, put in your titles and thumbnails, and
-        press "Begin Test." Once the test is completed, you can look at your analytics and figure out which of your combinations performed the best. Is it
-        as seamless as YouTube's own offering will be? Nope! Not even close! But it's available now, to everybody. No special treatment required.</p>
+        <p>The problem is that it can be <em>really</em> hard to know whether or not a thumbnail is, you know, good. And
+            it's not like YouTube helps you to select one! Their auto-generated thumbnails are just a frame pulled from
+            the video with one of the site's <em>many</em> mysterious algorithms, and their automatic thumbnail AB
+            testing has only rolled out to a handful of creators.</p>
+
+        <p>Enter VideoAb. Simple automatic thumbnail and title AB testing. Just select the video to run the test on, put
+            in your titles and thumbnails, and press "Begin Test." Once the test is completed, you can look at your
+            analytics and figure out which of your combinations performed the best. Is it as seamless as YouTube's own
+            offering will be? Nope! Not even close! But it's available now, to everybody. No special treatment required.
+        </p>
     </section>
     <section class="dark-background">
-        <p>Click the button below to get started. When you do so, it will prompt you to sign into your Google account and select the channel you want to use
-        with this tool. All of your information stays in your browser, and does not get sent to me, the creator of this app. The only way this information
-        is used is to enable interfacing with YouTube.</p>
-        <button class="big-button">Get Started</button>
+        <p>Click the button below to get started. When you do so, it will prompt you to sign into your Google account
+            and select the channel you want to use with this tool. All of your information stays in your browser, and
+            does not get sent to me, the creator of this app. The only way this information is used is to enable
+            interfacing with YouTube.</p>
+        <button class="big-button" onclick="window.location.href = '/app/'">Get Started</button>
     </section>
 </body>
 

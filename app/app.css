@@ -12,8 +12,8 @@ body {
 
 p,
 ul {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 em {
@@ -56,7 +56,7 @@ header {
     height: 5vh;
     width: 100vw;
     border-bottom: 0.1rem solid var(--border-color);
-    background-color: white;
+    background-color: #fff;
 }
 
 #logo {
@@ -66,7 +66,7 @@ header {
 
 #google-auth {
     width: 30vw;
-    height: 50vh;
+    padding: 2rem;
 }
 
 #app {
@@ -79,7 +79,7 @@ header {
 }
 
 .app-panel {
-    background-color: white;
+    background-color: #fff;
     border: 0.1rem solid var(--border-color);
     border-radius: 0.5rem;
 }
@@ -109,14 +109,14 @@ header {
 
 .videolistitem div {
     float: left;
-    padding: 1em;
+    padding: 1rem;
     width: calc(100% - 16rem - 2rem);
 }
 
 .videolistitem div h3 {
     font-size: 1.5rem;
     font-weight: bold;
-    white-space: nowrap;
+    #fff-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
@@ -175,5 +175,5 @@ header {
     display: box;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
-    white-space: normal;
+    #fff-space: normal;
 }

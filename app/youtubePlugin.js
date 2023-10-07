@@ -9,7 +9,7 @@ var API_KEY;
  * Loads the API key from the external apikey.txt file.
  */
 async function loadApiKey() {
-    await fetch("/apikey.txt")
+    await fetch("apikey.txt")
         .then(response => response.text())
         .then(key => {
             API_KEY = key
@@ -18,7 +18,7 @@ async function loadApiKey() {
 }
 
 async function loadClientId() {
-    await fetch("./clientid.txt")
+    await fetch("clientid.txt")
         .then(response => response.text())
         .then(id => {
             CLIENT_ID = id;
@@ -41,7 +41,8 @@ function getGoogleOauthToken() {
 }
 
 /**
- * Once gapi has loaded, set up gapi and load necessary scopes.
+ * Once gapi has loaded, set up gapi with the necessary scopes and get api key
+ * and client id.
  */
 function setupGapi() {
     gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
@@ -53,44 +54,15 @@ function setupGapi() {
 }
 
 /**
- * Load gapi, handling the case that gapi has not yet loaded.
+ * Run gapi.load, or wait 10ms if google apis are still being retrieved.
  */
 function loadGapi() {
     // If not yet loaded, wait 10 milliseconds and recurse.
-    if (typeof gapi === 'undefined'){
+    if (typeof gapi === 'undefined')
         window.setTimeout(loadGapi, 10);
-        return;
-    }
-
-    // If it is loaded, then setup gapi
-    gapi.load('client', setupGapi);
-}
-
-function getGoogleOauthTokenOneTap(credential){
-    gapi.auth2.authorize({
-        response_type: 'permission', // Access Token.
-        scope: 'https://www.googleapis.com/auth/youtube',
-        client_id: CLIENT_ID,
-        login_hint: credential
-    }, function(result) {console.log(result)});
-}
-
-function handleGoogleCredentials(response){
-    console.log(response);
-    getGoogleOauthTokenOneTap(response.clientId);
-}
-
-/**
- * Setup Google Identity API
- */
-function setupGoogleIdentity() {
-    google.accounts.id.initialize({
-        client_id: CLIENT_ID,
-        callback: handleGoogleCredentials
-    });
-
-    const parent = document.getElementById('google-signin-button');
-    google.accounts.id.renderButton(parent, {theme: "filled_blue", shape:"pill", context: "use"});
+    else
+        // If it is loaded, then setup gapi 
+        gapi.load('client', setupGapi);
 }
 
 loadGapi();
