@@ -116,7 +116,7 @@ header {
 .videolistitem div h3 {
     font-size: 1.5rem;
     font-weight: bold;
-    #fff-space: nowrap;
+    white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
@@ -175,5 +175,5 @@ header {
     display: box;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
-    #fff-space: normal;
+    white-space: normal;
 }
