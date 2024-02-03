@@ -174,6 +174,15 @@ function handleChannelResponse(response) {
 }
 
 /**
+ * Increment the stage of the test we're on by one and then update progress info to match.
+ */
+function updateProgress(){
+    videoAb.currentTestStage++;
+    document.getElementById("progress-text").innerText = videoAb.currentTestStage + "/" + videoAb.testStages + " Stages Completed";
+    document.getElementById("progress-bar").style.width = ((videoAb.currentTestStage / videoAb.testStages) * 100) + "%";
+}
+
+/**
  * Changes the thumbnail of the given video to the given new thumbnail.
  * @param {*} videoId The ID of the video whose thumbnail we're changing.
  * @param {*} newThumbnail The new thumbnail for the video.
@@ -218,6 +227,8 @@ function changeInfo(videoId, package) {
         changeTitle(videoId, package.title);
     if(package.thumbnail != null)
         changeThumbnail(videoId, package.thumbnail);
+
+    updateProgress();
 }
 
 /**
@@ -380,9 +391,13 @@ function runABTest() {
         return;
     }
 
+
     const settings = getAbTestSettings();
     let items = generateCombinations();
     let accumlatedTimeout = 0;
+
+    videoAb.testStages = items.length;
+    videoAb.currentTestStage = 0;
 
     for (let item of items) {
         setTimeout(() => {
@@ -390,6 +405,8 @@ function runABTest() {
         }, accumlatedTimeout);
         accumlatedTimeout += settings.interval;
     }
+
+    document.getElementById("progress-bar-marquee").style.display = "block";
 }
 
 function setupApp() {
