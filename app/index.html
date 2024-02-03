@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
 
 <head>
     <title>VideoAb</title>
@@ -15,7 +15,7 @@
 </head>
 
 <body onload="getGoogleOauthToken()">
-    <header><img id="logo" height="100%" src="/logo.svg"></header>
+    <header><img id="logo" src="/logo.svg" alt=""></header>
     <!--Show before authentication-->
     <div id="google-auth" class="autocenter app-panel">
         <p>The app will load once you complete the Google Authentication prompt that popped up. If there was no pop-up
@@ -36,7 +36,8 @@
                 <!--This element is populated by Javascript.-->
                 <div id="loading-box" class="videolistitem">
                     <img src="/loadingwheel.svg"
-                        style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+                        style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);"
+                        alt="A spinning circle">
                 </div>
             </div>
         </div>
@@ -87,6 +88,12 @@
             <h2>Preview</h2>
             <div id="preview-list">
                 <!--This element is populated by script.-->
+            </div>
+        </div>
+        <div id="progress-bar-marquee">
+            <div id="progress-bar-container">
+                <h3>Test Progress</h3>
+                <div id="progress-bar"></div>
             </div>
         </div>
     </div>
