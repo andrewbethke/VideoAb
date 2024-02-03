@@ -30,7 +30,7 @@
 
         <!--Once the user is logged in, show the actual app.-->
         <div id="app" style="display: none;">
-            <div id="video-panel" class="app-panel" onscroll="infiniteScrollHandler()">
+            <div id="video-panel" class="app-panel" onscroll="videoAb.ui.infiniteScrollHandler()">
                 <h2>Videos</h2>
                 <div id="video-list">
                     <!--This element is populated by Javascript.-->
@@ -65,8 +65,8 @@
                         <span>Title 1: </span><input type="text" id="title1" maxlength="100"><br>
                         <span>Title 2: </span><input type="text" id="title2" maxlength="100"><br>
                     </div>
-                    <button id="add-title" class="small-button" onclick="addTitle()">+</button>
-                    <button id="remove-title" class="small-button" onclick="removeTitle()">-</button>
+                    <button id="add-title" class="small-button" onclick="videoAb.ui.addTitle()">+</button>
+                    <button id="remove-title" class="small-button" onclick="videoAb.ui.removeTitle()">-</button>
                 </div>
                 <div id="thumbnailcontrol" class="settingspanel">
                     <h3>Thumbnail Settings</h3>
@@ -75,12 +75,12 @@
                         <span>Thumbnail 1: </span><input type="file" accept="image/jpeg,image/png" id="thumbnail1"><br>
                         <span>Thumbnail 2: </span><input type="file" accept="image/jpeg,image/png" id="thumbnail2"><br>
                     </div>
-                    <button id="add-thumbnail" class="small-button" onclick="addThumbnail()">+</button>
-                    <button id="remove-thumbnail" class="small-button" onclick="removeThumbnail()">-</button>
+                    <button id="add-thumbnail" class="small-button" onclick="videoAb.ui.addThumbnail()">+</button>
+                    <button id="remove-thumbnail" class="small-button" onclick="videoAb.ui.removeThumbnail()">-</button>
                 </div>
 
                 <div class="settingspanel">
-                    <button onclick="runABTest()" class="big-button">Begin AB Test</button>
+                    <button onclick="videoAb.test.run()" class="big-button">Begin AB Test</button>
                 </div>
             </div>
             <!-- TODO: Implement a preview of what the video will look like on YouTube with all the thumbnail/title combinations.-->
@@ -105,8 +105,10 @@
         <!--Scripts are loaded last.-->
         <script src="https://apis.google.com/js/api.js"></script>
         <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <script src="videoab-setup.js"></script>
+        <script src="videoab-backend.js"></script>
+        <script src="videoab-ui.js"></script>
         <script src="youtubePlugin.js"></script>
-        <script src="videoab.js"></script>
     </body>
 
 </html>

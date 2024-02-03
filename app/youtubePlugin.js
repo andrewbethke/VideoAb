@@ -34,7 +34,7 @@ function getGoogleOauthToken() {
         scope: 'https://www.googleapis.com/auth/youtube',
         callback: (response) => {
             gapi.client.setToken(response)
-            setupApp();
+            videoAb.setupApp(); 
         }
     });
     googleOauthClient.requestAccessToken();
