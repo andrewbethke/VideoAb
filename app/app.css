@@ -198,6 +198,10 @@ header {
     position: absolute;
 }
 
+#progress-text {
+    text-align: center;
+}
+
 #progress-bar-back {
     width: 80%;
     height: 1.5rem;

@@ -19,7 +19,6 @@ class VideoInfo {
     }
 }
 
-
 function logError(err) {
     console.log(err);
 }
@@ -37,8 +36,8 @@ let scrollObserver = new IntersectionObserver(infiniteScrollHandler);
 scrollObserver.observe(document.getElementById("loading-box"));
 
 /**
- * Runs when a video in the video list is clicked. Changes styling of the video
- * in the list and sets the program's selected video ID.
+ * Runs when a video in the video list is clicked. Adds indicators in the list
+ * and sets the program's selected video ID.
  * @param {String} videoId 
  */
 function selectVideo(videoId) {
@@ -391,10 +390,9 @@ function runABTest() {
         return;
     }
 
-
     const settings = getAbTestSettings();
     let items = generateCombinations();
-    let accumlatedTimeout = 0;
+    let accumulatedTimeout = 0;
 
     videoAb.testStages = items.length;
     videoAb.currentTestStage = 0;
@@ -402,11 +400,14 @@ function runABTest() {
     for (let item of items) {
         setTimeout(() => {
             changeInfo(videoAb.selected, item);
-        }, accumlatedTimeout);
-        accumlatedTimeout += settings.interval;
+        }, accumulatedTimeout);
+        accumulatedTimeout += settings.interval;
     }
 
     document.getElementById("progress-bar-marquee").style.display = "block";
+    setTimeout(() => {
+        document.getElementById("progress-bar-marquee").style.display = "none";
+    }, accumulatedTimeout - settings.interval);
 }
 
 function setupApp() {
