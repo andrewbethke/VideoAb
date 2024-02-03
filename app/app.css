@@ -39,9 +39,12 @@ h1, h2, h3, h4, h5, h6
     font-family: 'Raleway';
 }
 
+h1, h2 {
+    text-align: center;
+}
+
 h1 {
     font-size: 3rem;
-    text-align: center;
 }
 
 h2 {
@@ -82,6 +85,7 @@ header {
     background-color: #fff;
     border: 0.1rem solid var(--border-color);
     border-radius: 0.5rem;
+    padding: 1rem 0;
 }
 
 #video-panel {
@@ -176,4 +180,36 @@ header {
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     white-space: normal;
+}
+
+#progress-bar-marquee {
+    width: 100vw;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(72, 72, 72, 0.5);
+    display: none;
+}
+
+#progress-bar-container {
+    width: 33vw;
+    height: 20vh;
+    position: absolute;
+}
+
+#progress-bar-back {
+    width: 80%;
+    height: 1.5rem;
+    border-radius: 0.75rem;
+    background-color: var(--bg-color);
+    overflow: hidden;
+}
+
+#progress-bar {
+    position: absolute;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: var(--brand-color);
 }
