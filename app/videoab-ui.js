@@ -9,7 +9,7 @@ videoAb.ui.infiniteScrollHandler = function (entries) {
         return;
 
     if (entries[0].isIntersecting) {
-        requestPlaylistItems(videoAb.playlistId, videoAb.nextVideoPageToken);
+        videoAb.backend.requestPlaylistItems(videoAb.playlistId, videoAb.nextVideoPageToken);
     }
 }
 
@@ -121,7 +121,7 @@ videoAb.ui.generatePreviews = function(){
  */
 videoAb.ui.addTitle = function () {
     // Make and fill a span to contain the label text of the new title box.
-    let newTitleLabel = document.createElement("span");
+    let newTitleLabel = document.createElement("label");
     newTitleLabel.innerText = `Title ${Math.floor(document.getElementById("title-inputs").children.length / 3) + 1}: `;
 
     // Make an input that is the new title box.

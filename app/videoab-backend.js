@@ -56,7 +56,7 @@ videoAb.backend.requestVideos = function (response) {
     gapi.client.youtube.videos.list({
         "part": ["snippet,contentDetails,statistics"],
         "id": videoIdList
-    }).then(videoAb.ui.populateVideos, console.log);
+    }).then(videoAb.ui.populateVideos, console.error);
 }
 
 /**
@@ -71,7 +71,7 @@ videoAb.backend.requestPlaylistItems = function (playlistId, pageToken = null) {
         "part": ["snippet,contentDetails"],
         "maxResults": 10,
         "pageToken": pageToken
-    }).then(videoAb.backend.requestVideos, console.log);
+    }).then(videoAb.backend.requestVideos, console.error);
 }
 
 /**
@@ -87,7 +87,7 @@ videoAb.test.changeThumbnail = function(videoId, newThumbnail) {
             "Content-Type": newThumbnail.type
         },
         "body": newThumbnail
-    }).then(console.log);
+    }).then(console.log, console.error);
 }
 
 /**
@@ -106,7 +106,7 @@ videoAb.test.changeTitle = function (videoId, newTitle) {
             "id": videoId,
             "snippet": snippet
         }
-    }).then(function (response) { console.log(response) }, console.log);
+    }).then(function (response) { console.log(response) }, console.error);
 }
 
 /**

@@ -4,27 +4,12 @@
         <title>VideoAb</title>
         <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
         <link rel="stylesheet" href="app.css">
-        <link rel="stylesheet" href="/styles/shared.css">
-        <link rel="icon" href="/favicon.svg">
-        <!--Google Fonts-->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Raleway&family=Lora&family=Roboto:wght@500&display=swap"
-            rel="stylesheet">
     </head>
-    <body onload="getGoogleOauthToken()">
-        <header><img id="logo" src="/logo.svg" alt=""></header>
+    <body>
         <!--Show before authentication-->
         <div id="google-auth" class="autocenter app-panel">
-            <p>The app will load once you complete the Google Authentication prompt that popped up. If there was no
-                pop-up
-                or you closed the pop-up, you can click the button below to open another one.</p>
-
-            <p>If you don't want to grant the app access to manage your YouTube channel, that's fine! It just... it
-                needs
-                that in order to change thumbnails, so it won't work if you choose not to grant that access. Still your
-                choice, just don't use the app if you don't trust it. Doesn't matter to me.</p>
-
+            <p>The app will load once you complete the Google Authentication prompt and select your
+                YouTube channel by clicking the button below.</p>
             <button class="big-button" onclick="getGoogleOauthToken()">Get Started</button>
         </div>
 
@@ -43,55 +28,46 @@
             </div>
             <div id="controlpanel" class="app-panel">
                 <h2>AB Testing Configuration</h2>
-                <div id="generalcontrol" class="settingspanel">
-                    <h3>General Settings</h3>
-                    <h4>Properties to AB Test:</h4>
-                    Titles: <input type="checkbox" name="Titles" id="titleCheckbox" checked><br>
-                    Thumbnails: <input type="checkbox" name="Thumbnails" id="thumbnailCheckbox"><br>
-                    <h4>AB Testing Settings</h4>
-                    Time between swaps: <input type="number" name="Swap Time" id="swapInterval" min="1" value="10">
-                    minutes<br>
-                    <p>When both titles and thumbnails are being AB tested, would
-                        you like to link them?</p>
-                    <p>When this is selected, title 1 and thumbnail 1 will be treated
-                        as one configuration, and will only be tested together. When this is
-                        unselected, every combination of title and thumbnail will be tried.</p>
-                    <input type="checkbox" name="Link Properties" id="linkProperties" checked><br>
-                </div>
-                <div id="titlecontrol" class="settingspanel">
-                    <h3>Title Settings</h3>
-                    Note: These settings will be ignored if you've selected not to AB test titles.<br>
-                    <div id="title-inputs">
-                        <span>Title 1: </span><input type="text" id="title1" maxlength="100"><br>
-                        <span>Title 2: </span><input type="text" id="title2" maxlength="100"><br>
+                <div id="settings">
+                    <div id="generalcontrol" class="settingspanel">
+                        <h3>General Settings</h3>
+                        <h4>Properties to AB Test:</h4>
+                        Titles: <input type="checkbox" name="Titles" id="titleCheckbox" checked><br>
+                        Thumbnails: <input type="checkbox" name="Thumbnails" id="thumbnailCheckbox"><br>
+                        <h4>AB Testing Settings</h4>
+                        Time between swaps: <input type="number" name="Swap Time" id="swapInterval" min="1" value="10">
+                        minutes<br>
+                        <p>When both titles and thumbnails are being AB tested, would
+                            you like to link them? <input type="checkbox" name="Link Properties" id="linkProperties" checked></p>
+                        <p>When this is selected, title 1 and thumbnail 1 will be treated
+                            as one configuration, and will only be tested together. When this is
+                            unselected, every combination of title and thumbnail will be tried.</p>
                     </div>
-                    <button id="add-title" class="small-button" onclick="videoAb.ui.addTitle()">+</button>
-                    <button id="remove-title" class="small-button" onclick="videoAb.ui.removeTitle()">-</button>
-                </div>
-                <div id="thumbnailcontrol" class="settingspanel">
-                    <h3>Thumbnail Settings</h3>
-                    Note: These settings will be ignored if you've selected not to AB test thumbnails.<br>
-                    <div id="thumbnail-inputs">
-                        <span>Thumbnail 1: </span><input type="file" accept="image/jpeg,image/png" id="thumbnail1"><br>
-                        <span>Thumbnail 2: </span><input type="file" accept="image/jpeg,image/png" id="thumbnail2"><br>
+                    <div id="titlecontrol" class="settingspanel">
+                        <h3>Titles</h3>
+                        <p>Note: These will be ignored if you've selected not to AB test titles.</p>
+                        <div id="title-inputs">
+                            <label>Title 1: </label><input type="text" maxlength="100"><br>
+                            <label>Title 2: </label><input type="text" maxlength="100"><br>
+                        </div>
+                        <button id="add-title" class="small-button" onclick="videoAb.ui.addTitle()">+</button>
+                        <button id="remove-title" class="small-button" onclick="videoAb.ui.removeTitle()">-</button>
                     </div>
-                    <button id="add-thumbnail" class="small-button" onclick="videoAb.ui.addThumbnail()">+</button>
-                    <button id="remove-thumbnail" class="small-button" onclick="videoAb.ui.removeThumbnail()">-</button>
+                    <div id="thumbnailcontrol" class="settingspanel">
+                        <h3>Thumbnails</h3>
+                        <p>Note: These will be ignored if you've selected not to AB test thumbnails.</p>
+                        <div id="thumbnail-inputs">
+                            <label>Thumbnail 1: </label><input type="file" accept="image/jpeg,image/png"><br>
+                            <label>Thumbnail 2: </label><input type="file" accept="image/jpeg,image/png"><br>
+                        </div>
+                        <button id="add-thumbnail" class="small-button" onclick="videoAb.ui.addThumbnail()">+</button>
+                        <button id="remove-thumbnail" class="small-button" onclick="videoAb.ui.removeThumbnail()">-</button>
+                    </div>
                 </div>
-
-                <div class="settingspanel">
-                    <button onclick="videoAb.test.run()" class="big-button">Begin AB Test</button>
-                </div>
-            </div>
-            <!-- TODO: Implement a preview of what the video will look like on YouTube with all the thumbnail/title combinations.-->
-            <div id="preview-panel" class="app-panel">
-                <h2>Preview</h2>
-                <div id="preview-list">
-                    <!--This element is populated by script.-->
-                </div>
+                <button onclick="videoAb.test.run()" class="big-button">Begin AB Test</button>
             </div>
 
-            <div id="progress-bar-marquee">
+            <div id="progress-bar-marquee" style="display: none;">
                 <div id="progress-bar-container" class="app-panel autocenter">
                     <h2>Test Progress</h2>
                     <p id="progress-text"></p>
@@ -108,7 +84,5 @@
         <script src="videoab-setup.js"></script>
         <script src="videoab-backend.js"></script>
         <script src="videoab-ui.js"></script>
-        <script src="youtubePlugin.js"></script>
     </body>
-
 </html>
