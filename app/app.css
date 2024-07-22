@@ -48,11 +48,11 @@ h1, h2, h3, h4, h5, h6
 {
     font-weight: bold;
     font-family: sans-serif;
-    text-align: center;
 }
 
 h2 {
     font-size: 2rem;
+    text-align: center;
 }
 
 h3 {
@@ -151,6 +151,9 @@ button {
 
 #controlpanel {
     grid-column: 2;
+}
+#controlpanel h3 {
+    text-align: center;
 }
 
 #main-options {
