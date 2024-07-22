@@ -48,14 +48,15 @@ h1, h2, h3, h4, h5, h6
 {
     font-weight: bold;
     font-family: sans-serif;
+    text-align: center;
 }
 
 h2 {
     font-size: 2rem;
-    text-align: center;
 }
 
 h3 {
+    font-size: 1.5rem;
     margin-bottom: 0.5rem;
 }
 
@@ -152,17 +153,40 @@ button {
     grid-column: 2;
 }
 
-#settings {
-    display: flex;
+#main-options {
+    padding: 1rem 20%;
+    font-size: 1.25rem;
 }
 
-.settingspanel {
-    width: calc(100% / 3);
+#test-item-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#test-item-inputs, .item-panel {
     padding: 1rem;
 }
 
+.input-box {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0.5rem;
+}
+
+.input-box input {
+    flex: 1;
+}
+
+#titles-panel {
+    grid-column: 1;
+}
+
+#thumbnails-panel {
+    grid-column: 2;
+}
+
 input[type=text] {
-    width: 60%;
+    width: max-content;
 }
 
 #progress-bar-marquee {

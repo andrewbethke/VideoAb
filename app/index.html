@@ -28,43 +28,41 @@
             </div>
             <div id="controlpanel" class="app-panel">
                 <h2>AB Testing Configuration</h2>
-                <div id="settings">
-                    <div id="generalcontrol" class="settingspanel">
-                        <h3>General Settings</h3>
-                        <h4>Properties to AB Test:</h4>
-                        Titles: <input type="checkbox" name="Titles" id="titleCheckbox" checked><br>
-                        Thumbnails: <input type="checkbox" name="Thumbnails" id="thumbnailCheckbox"><br>
-                        <h4>AB Testing Settings</h4>
-                        Time between swaps: <input type="number" name="Swap Time" id="swapInterval" min="1" value="10">
-                        minutes<br>
-                        <p>When both titles and thumbnails are being AB tested, would
-                            you like to link them? <input type="checkbox" name="Link Properties" id="linkProperties" checked></p>
-                        <p>When this is selected, title 1 and thumbnail 1 will be treated
-                            as one configuration, and will only be tested together. When this is
-                            unselected, every combination of title and thumbnail will be tried.</p>
-                    </div>
-                    <div id="titlecontrol" class="settingspanel">
+                <div id="main-options">
+                    <h3>Options</h3>
+                    <p>
+                        Time between swaps (minutes):
+                        <input type="number" name="Swap Time" id="swapInterval" min="1" value="10">
+                    </p>
+                    <p>
+                        Pair titles and thumbnails
+                        (only test thumbnail 1 with title 1, thumbnail 2 with title 2, etc.):
+                        <input type="checkbox" name="Link Properties" id="linkProperties">
+                    </p>
+                    <button onclick="videoAb.test.run()" class="big-button">Begin AB Test</button>
+                </div>
+                <div id="test-item-inputs">
+                    <div id="titles-panel" class="item-panel">
                         <h3>Titles</h3>
-                        <p>Note: These will be ignored if you've selected not to AB test titles.</p>
+                        <p>Enable Titles? <input type="checkbox" name="Titles" id="titleCheckbox" checked></p>
                         <div id="title-inputs">
-                            <label>Title 1: </label><input type="text" maxlength="100"><br>
-                            <label>Title 2: </label><input type="text" maxlength="100"><br>
+                            <div class="input-box"><label>1. </label><input type="text" maxlength="100"><br></div>
+                            <div class="input-box"><label>2. </label><input type="text" maxlength="100"><br></div>
                         </div>
                         <button id="add-title" class="small-button" onclick="videoAb.ui.addTitle()">+</button>
                         <button id="remove-title" class="small-button" onclick="videoAb.ui.removeTitle()">-</button>
                     </div>
-                    <div id="thumbnailcontrol" class="settingspanel">
+                    <div id="thumbnails-panel" class="item-panel">
                         <h3>Thumbnails</h3>
-                        <p>Note: These will be ignored if you've selected not to AB test thumbnails.</p>
+                        <p>Enable Thumbnails? <input type="checkbox" name="Thumbnails" id="thumbnailCheckbox"></p>
                         <div id="thumbnail-inputs">
-                            <label>Thumbnail 1: </label><input type="file" accept="image/jpeg,image/png"><br>
-                            <label>Thumbnail 2: </label><input type="file" accept="image/jpeg,image/png"><br>
+                            <div class="input-box"><label>1. </label><input type="file" accept="image/jpeg,image/png"></div>
+                            <div class="input-box"><label>2. </label><input type="file" accept="image/jpeg,image/png"></div>
                         </div>
                         <button id="add-thumbnail" class="small-button" onclick="videoAb.ui.addThumbnail()">+</button>
                         <button id="remove-thumbnail" class="small-button" onclick="videoAb.ui.removeThumbnail()">-</button>
                     </div>
                 </div>
-                <button onclick="videoAb.test.run()" class="big-button">Begin AB Test</button>
             </div>
 
             <div id="progress-bar-marquee" style="display: none;">
