@@ -182,10 +182,8 @@ videoAb.ui.getTitles = function () {
 
     // Get the parent element for the titles and get an Array of the children.
     Array.from(document.getElementById("title-inputs").children)
-        // Throw away the elements that aren't <input> tags.
-        .filter((element) => element.tagName == "INPUT")
-        // Add each remaining tag to the list of titles.
-        .forEach((item) => titles.push(item.value));
+        // Add the input tag from each child to the list of titles.
+        .forEach((item) => titles.push(item.getElementsByTagName("input")[0].value));
 
     return titles;
 }
@@ -195,10 +193,8 @@ videoAb.ui.getThumbnails = function () {
 
     // Get the parent element for the titles and get an Array of the children.
     Array.from(document.getElementById("thumbnail-inputs").children)
-        // Throw away the elements that aren't <input> tags.
-        .filter((element) => element.tagName == "INPUT")
         // Add each remaining tag to the list of titles.
-        .forEach((item) => thumbnails.push(item.files[0]));
+        .forEach((item) => thumbnails.push(item.getElementsByTagName("input")[0].files[0]));
 
     return thumbnails;
 }
