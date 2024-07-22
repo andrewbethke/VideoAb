@@ -116,44 +116,44 @@ videoAb.ui.generatePreviews = function(){
     }
 }
 
+videoAb.ui.addInput = function (parentElement, inputElement) {
+    // Make a new container for the new title input.
+    let newInputBox = document.createElement("div");
+    newInputBox.classList.add("input-box");
+
+    // Make and fill a label for the new input box.
+    let newInputLabel = document.createElement("label");
+    newInputLabel.innerText = `${parentElement.children.length + 1}.`;
+
+    // Add children to the container box and add the box to the parent.
+    newInputBox.appendChild(newInputLabel);
+    newInputBox.appendChild(inputElement);
+    parentElement.appendChild(newInputBox);
+}
+
 /**
  * Adds the necessary DOM objects to have another title box.
  */
 videoAb.ui.addTitle = function () {
-    // Make and fill a span to contain the label text of the new title box.
-    let newTitleLabel = document.createElement("label");
-    newTitleLabel.innerText = `Title ${Math.floor(document.getElementById("title-inputs").children.length / 3) + 1}: `;
-
     // Make an input that is the new title box.
     let newTitleInput = document.createElement("input");
     newTitleInput.type = "text";
     newTitleInput.maxLength = 100;
 
-    // Add the previous two elements and a line break to the title-inputs container.
-    document.getElementById("title-inputs").appendChild(newTitleLabel);
-    document.getElementById("title-inputs").appendChild(newTitleInput);
-    document.getElementById("title-inputs").appendChild(document.createElement("br"));
+    videoAb.ui.addInput(document.getElementById("title-inputs"), newTitleInput);
 }
 
 videoAb.ui.removeTitle = function () {
-    for (let i = 0; i < 3; i++)
-        document.getElementById("title-inputs").removeChild(document.getElementById("title-inputs").lastChild);
+    document.getElementById("title-inputs").removeChild(document.getElementById("title-inputs").lastChild);
 }
 
 videoAb.ui.addThumbnail = function () {
-    // Make and fill a span to contain the label text of the new thumbnail box.
-    let newThumbnailLabel = document.createElement("span");
-    newThumbnailLabel.innerText = `Thumbnail ${Math.floor(document.getElementById("thumbnail-inputs").children.length / 3) + 1}: `;
-
     // Make an input that is the new thumbnail box.
     let newThumbnailInput = document.createElement("input");
     newThumbnailInput.type = "file";
     newThumbnailInput.accept = "image/jpeg,image/png";
 
-    // Add the previous two elements and a line break to the title-inputs container.
-    document.getElementById("thumbnail-inputs").appendChild(newThumbnailLabel);
-    document.getElementById("thumbnail-inputs").appendChild(newThumbnailInput);
-    document.getElementById("thumbnail-inputs").appendChild(document.createElement("br"));
+    videoAb.ui.addInput(document.getElementById("thumbnail-inputs"), newThumbnailInput);
 }
 
 videoAb.ui.removeThumbnail = function () {
